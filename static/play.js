@@ -7,7 +7,7 @@ const DATA = JSON.parse(document.getElementById("deck-data").textContent);
 const CARDS = DATA.cards;
 const state = {table: new Set(), revealed: new Set(), all: false, notes: false, fresh: null};
 
-const displayId = id => id.replace(/Qc$/, "cQm").replace(/Qm$/, "mQc");
+const displayId = id => id.endsWith("Qc") ? `${id.slice(0, -2)}cQm` : id.endsWith("Qm") ? `${id.slice(0, -2)}mQc` : id;
 const keyHTML = id => `<span class="key">${displayId(id)}</span>`;
 const isRevealed = c => state.all || c.lock.length === 0 || state.revealed.has(c.id);
 
@@ -32,17 +32,30 @@ function actionFor(c){
     : `<button type="button" class="act" data-act="place" data-id="${c.id}" aria-pressed="false">Poser sur la table</button>`;
 }
 
+function slotFor(c){
+  const on = state.table.has(c.id);
+  const face = isRevealed(c) ? c.recto : c.verso;
+  return `<div class="slot${on ? " on" : ""}"><div class="${state.fresh === c.id ? "just-revealed" : ""}">${face}</div>${actionFor(c)}${state.notes && c.note ? `<p class="note">${c.note}</p>` : ""}</div>`;
+}
+
 function renderPlay(){
   let html = "";
   DATA.sections.forEach(s => {
-    html += `<section class="chain" id="ch-${s.key}"><div class="chain-head"><span class="num">${s.key}</span><div><h2>${s.theme}</h2><p>${s.intention}</p></div></div><div class="row">`;
-    CARDS.filter(c => c.section === s.key).forEach(c => {
-      const on = state.table.has(c.id);
-      const gap = c.type === "E" ? " gap" : "";
-      const face = isRevealed(c) ? c.recto : c.verso;
-      html += `<div class="slot${on ? " on" : ""}${gap}"><div class="${state.fresh === c.id ? "just-revealed" : ""}">${face}</div>${actionFor(c)}${state.notes && c.note ? `<p class="note">${c.note}</p>` : ""}</div>`;
-    });
-    html += `</div></section>`;
+    const sectionCards = CARDS.filter(c => c.section === s.key);
+    html += `<section class="chain" id="ch-${s.key}"><div class="chain-head"><span class="num">${s.key}</span><div><h2>${s.theme}</h2><p>${s.intention}</p></div></div>`;
+    if (/^\d+$/.test(s.key)){
+      const byType = new Map(sectionCards.map(c => [c.type, c]));
+      const stages = [["T", "R"], ["E"], ["Qm", "Qc"], ["M"], ["C"], ["L"]];
+      html += `<div class="family-flow">`;
+      stages.forEach((types, index) => {
+        if (index) html += `<span class="flow-down" aria-hidden="true">↓</span>`;
+        html += `<div class="family-row${types.length === 1 ? " single" : ""}">${types.map(type => byType.get(type)).filter(Boolean).map(slotFor).join("")}</div>`;
+      });
+      html += `</div>`;
+    } else {
+      html += `<div class="row">${sectionCards.map(slotFor).join("")}</div>`;
+    }
+    html += `</section>`;
   });
   const play = document.getElementById("play");
   play.innerHTML = html;

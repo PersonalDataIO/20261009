@@ -40,8 +40,11 @@ button{font:inherit;color:inherit}
 .chain-head h2{font-family:Archivo,"Arial Black",sans-serif;font-stretch:112%;font-weight:800;font-size:24px;line-height:1.1;margin:2px 0 4px}
 .chain-head p{margin:0;color:var(--muted);font-size:15px}
 .row{display:flex;flex-wrap:wrap;gap:16px 14px}
+.family-flow{display:flex;flex-direction:column;align-items:center;gap:5px}
+.family-row{display:flex;justify-content:center;align-items:flex-start;gap:14px;width:100%}
+.family-row.single .slot{width:63mm}
+.flow-down{font-family:Archivo,"Arial Black",sans-serif;font-size:18px;font-weight:900;line-height:1;height:18px}
 .slot{width:63mm;display:flex;flex-direction:column;gap:8px}
-.slot.gap{margin-left:18px}
 .slot.on .card{outline:3px solid var(--ink);outline-offset:3px}
 .act{border:2px solid var(--rule);background:var(--surface);padding:6px 10px;cursor:pointer;text-align:left;font-size:14px}
 .act.strong,.act.on{background:var(--btn-bg);color:var(--btn-ink)}
@@ -52,7 +55,7 @@ button{font:inherit;color:inherit}
 .just-revealed{animation:reveal .32s ease-out}
 @keyframes reveal{from{transform:rotateY(80deg);opacity:.2}to{transform:none;opacity:1}}
 @media (prefers-reduced-motion:reduce){.just-revealed{animation:none}}
-@media (max-width:620px){.slot.gap{margin-left:0}}
+@media (max-width:620px){.family-row{gap:10px}.family-row .slot{width:min(63mm,calc((100vw - 60px)/2))}.family-row.single .slot{width:min(63mm,calc(100vw - 40px))}}
 
 /* ============ Carte (voir templates/card.html.j2) ============ */
 .card{width:63mm;height:88mm;padding:1.6mm;background:#fff;color:#000;flex:none;position:relative;font-family:"Atkinson Hyperlegible",Verdana,sans-serif}
