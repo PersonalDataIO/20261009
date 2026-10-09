@@ -133,6 +133,18 @@
 </div></section>
 {% endfor %}
 
+{% for sheet in deck.cards|chunks(2) %}
+{% set cells = sheet + [none] * (2 - sheet|length) %}
+<section class="page print-2x1"><div class="sheet grid-2x1">
+  {% for c in cells %}{% if c %}<div class="cell">{{ card.recto(c) }}</div>{% else %}<div class="cell empty"></div>{% endif %}{% endfor %}
+  <div class="cut-guides" aria-hidden="true"><i class="vertical v1"></i></div>
+</div></section>
+<section class="page print-2x1"><div class="sheet grid-2x1">
+  {% for c in cells %}{% if c %}<div class="cell">{{ card.verso(c) }}</div>{% else %}<div class="cell empty"></div>{% endif %}{% endfor %}
+  <div class="cut-guides" aria-hidden="true"><i class="vertical v1"></i></div>
+</div></section>
+{% endfor %}
+
 {# ---------- Fiche animateur ---------- #}
 {% for group in deck.sections|chunks(2) %}
 <section class="page print-shared"><div class="doc fiche">

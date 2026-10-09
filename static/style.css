@@ -94,12 +94,15 @@ button{font:inherit;color:inherit}
 .pages{display:flex;flex-direction:column;align-items:center;gap:26px;width:max-content;margin:0 auto}
 .page{width:210mm;height:297mm;background:#fff;color:#000;flex:none;position:relative;overflow:hidden;font-family:"Atkinson Hyperlegible",Verdana,sans-serif}
 .pages.layout-3x3 .print-2x2,.pages.layout-2x2 .print-3x3{display:none}
-.pages.layout-3x3 .review-page,.pages.layout-2x2 .review-page{display:none}
-.pages.layout-review .print-shared,.pages.layout-review .print-3x3,.pages.layout-review .print-2x2{display:none}
+.pages.layout-3x3 .print-2x1,.pages.layout-2x2 .print-2x1,.pages.layout-2x1 .print-3x3,.pages.layout-2x1 .print-2x2{display:none}
+.pages.layout-3x3 .review-page,.pages.layout-2x2 .review-page,.pages.layout-2x1 .review-page{display:none}
+.pages.layout-review .print-shared,.pages.layout-review .print-3x3,.pages.layout-review .print-2x2,.pages.layout-review .print-2x1{display:none}
 .pages.layout-review .print-intro{display:block}
+.page.print-2x1{width:297mm;height:210mm;page:landscape-a4}
 .sheet{position:absolute;inset:0;display:grid;justify-content:start;align-content:start}
 .sheet.grid-3x3{grid-template-columns:repeat(3,70mm);grid-auto-rows:99mm}
 .sheet.grid-2x2{grid-template-columns:repeat(2,105mm);grid-auto-rows:148.5mm}
+.sheet.grid-2x1{grid-template-columns:repeat(2,148.5mm);grid-auto-rows:210mm}
 .cut-guides{position:absolute;inset:0;z-index:3;pointer-events:none}
 .cut-guides .vertical,.cut-guides .horizontal{position:absolute;border-color:#666;border-style:dashed;border-width:0}
 .cut-guides .vertical{top:0;bottom:0;border-left-width:.2mm}
@@ -110,8 +113,10 @@ button{font:inherit;color:inherit}
 .grid-3x3 .cut-guides .h2{top:198mm}
 .grid-2x2 .cut-guides .v1{left:105mm}
 .grid-2x2 .cut-guides .h1{top:148.5mm}
+.grid-2x1 .cut-guides .v1{left:148.5mm}
 .sheet.grid-3x3 .card{transform:scale(1.111111,1.125);transform-origin:top left}
 .sheet.grid-2x2 .card{transform:scale(1.666667,1.6875);transform-origin:top left}
+.sheet.grid-2x1 .card{transform:scale(2.357143,2.386364);transform-origin:top left}
 .plabel{position:absolute;left:0;right:0;bottom:6mm;text-align:center;font-size:7.5pt}
 .doc{padding:13mm 15mm;font-size:8.7pt;line-height:1.34}
 .doc h1{font-family:Archivo,"Arial Black",sans-serif;font-stretch:125%;font-weight:900;font-size:24pt;line-height:1;margin:0 0 3mm}
@@ -188,6 +193,7 @@ button{font:inherit;color:inherit}
 
 @media print{
   @page{size:A4 portrait;margin:0}
+  @page landscape-a4{size:A4 landscape;margin:0}
   :root{padding:0}
   html,body{background:#fff}
   .app{display:none!important}

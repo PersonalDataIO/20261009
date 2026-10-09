@@ -79,6 +79,7 @@ function show(which){
   document.getElementById("tab-play").setAttribute("aria-pressed", isPlay);
   document.getElementById("tab-print-3x3").setAttribute("aria-pressed", which === "print-3x3");
   document.getElementById("tab-print-2x2").setAttribute("aria-pressed", which === "print-2x2");
+  document.getElementById("tab-print-2x1").setAttribute("aria-pressed", which === "print-2x1");
   document.getElementById("tab-review").setAttribute("aria-pressed", which === "review");
   document.getElementById("play").style.display = isPlay ? "" : "none";
   document.getElementById("play-ctrls").style.display = isPlay ? "flex" : "none";
@@ -87,12 +88,14 @@ function show(which){
   const pages = document.getElementById("pages");
   pages.classList.toggle("layout-3x3", which === "print-3x3");
   pages.classList.toggle("layout-2x2", which === "print-2x2");
+  pages.classList.toggle("layout-2x1", which === "print-2x1");
   pages.classList.toggle("layout-review", which === "review");
   if (isPrint) fit(pages);
 }
 document.getElementById("tab-play").addEventListener("click", () => show("play"));
 document.getElementById("tab-print-3x3").addEventListener("click", () => show("print-3x3"));
 document.getElementById("tab-print-2x2").addEventListener("click", () => show("print-2x2"));
+document.getElementById("tab-print-2x1").addEventListener("click", () => show("print-2x1"));
 document.getElementById("tab-review").addEventListener("click", () => show("review"));
 document.getElementById("btn-print").addEventListener("click", () => { try { window.print(); } catch(e){} });
 
