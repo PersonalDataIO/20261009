@@ -1,0 +1,65 @@
+family: 1
+slug: 01-flair
+url: https://20261009.personaldata.io/
+translations:
+  en:
+    url: https://20261009.personaldata.io/
+scenes:
+  - duration: 3
+    kind: intro
+    label: Chauffeurs et mathématiciens
+    text: Le savoir tacite face à la machine
+    translations:
+      en:
+        label: Drivers and Mathematicians
+        text: Tacit knowledge facing the machine
+  - duration: 7
+    kind: driver
+    card: 1T
+    label: Chauffeur
+    translations:
+      en:
+        label: Driver
+  - duration: 7
+    kind: researcher
+    card: 1R
+    label: Mathématicien
+    verified: false
+    translations:
+      en:
+        label: Mathematician
+  - duration: 7
+    kind: echo
+    card: 1E
+    label: Un vécu commun
+    translations:
+      en:
+        label: A shared experience
+  - duration: 7
+    kind: question
+    card: 1Qc
+    label: Chauffeurs vers mathématiciens
+    translations:
+      en:
+        label: Drivers to mathematicians
+  - duration: 7
+    kind: question
+    card: 1Qm
+    label: Mathématiciens vers chauffeurs
+    translations:
+      en:
+        label: Mathematicians to drivers
+  - duration: 7
+    kind: tension
+    card: 1C
+    label: Ce qui reste invisible
+    translations:
+      en:
+        label: What remains invisible
+  - duration: 7
+    kind: action
+    card: 1L
+    label: Un levier commun
+    translations:
+      en:
+        label: A shared Lever

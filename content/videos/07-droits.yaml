@@ -1,0 +1,57 @@
+family: 7
+slug: 07-droits
+url: https://20261009.personaldata.io/
+scenes:
+  - duration: 3
+    kind: intro
+    label: Chauffeurs et mathématiciens
+    text: Du droit sur le papier au droit exercé ensemble
+    translations:
+      en:
+        label: Drivers and Mathematicians
+        text: From rights on paper to rights exercised together
+  - duration: 7
+    kind: driver
+    card: 7T
+    label: Chauffeur
+    translations:
+      en:
+        label: Driver
+  - duration: 7
+    kind: researcher
+    card: 7R
+    label: Mathématicien
+    verified: false
+    translations:
+      en:
+        label: Mathematician
+  - duration: 7
+    kind: echo
+    card: 7E
+    label: Un vécu commun
+    translations:
+      en:
+        label: A shared experience
+  - duration: 7
+    kind: question
+    card: 7Qc
+    label: Chauffeurs vers mathématiciens
+    verified: false
+    translations:
+      en:
+        label: Drivers to mathematicians
+  - duration: 7
+    kind: question
+    card: 7Qm
+    label: Mathématiciens vers chauffeurs
+    translations:
+      en:
+        label: Mathematicians to drivers
+  - duration: 7
+    kind: action
+    card: 7L
+    label: Un levier commun
+    verified: false
+    translations:
+      en:
+        label: A shared Lever

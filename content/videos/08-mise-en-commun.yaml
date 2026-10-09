@@ -1,0 +1,68 @@
+family: 8
+slug: 08-mise-en-commun
+url: https://20261009.personaldata.io/
+scenes:
+  - duration: 3
+    kind: intro
+    label: Chauffeurs et mathématiciens
+    text: Ce que partager coûte à chacun et rend possible ensemble
+    translations:
+      en:
+        label: Drivers and Mathematicians
+        text: What sharing costs each person and makes possible together
+  - duration: 7
+    kind: driver
+    card: 8T
+    label: Chauffeur
+    translations:
+      en:
+        label: Driver
+  - duration: 7
+    kind: researcher
+    card: 8R
+    label: Mathématicien
+    translations:
+      en:
+        label: Mathematician
+  - duration: 7
+    kind: echo
+    card: 8E
+    label: Un vécu commun
+    translations:
+      en:
+        label: A shared experience
+  - duration: 7
+    kind: question
+    card: 8Qc
+    label: Chauffeurs vers mathématiciens
+    translations:
+      en:
+        label: Drivers to mathematicians
+  - duration: 7
+    kind: question
+    card: 8Qm
+    label: Mathématiciens vers chauffeurs
+    translations:
+      en:
+        label: Mathematicians to drivers
+  - duration: 7
+    kind: tension
+    card: 8M
+    label: Le biais de sélection
+    translations:
+      en:
+        label: Selection bias
+  - duration: 7
+    kind: tension
+    card: 8C
+    label: Le consentement et ses garde-fous
+    translations:
+      en:
+        label: Consent and safeguards
+  - duration: 7
+    kind: action
+    card: 8L
+    label: Un levier commun
+    translations:
+      en:
+        label: A shared lever

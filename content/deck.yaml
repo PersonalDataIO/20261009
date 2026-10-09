@@ -54,3 +54,49 @@ sections:
 impression:
   consigne: "A4 recto verso, retournement sur le bord long, échelle 100 %. Papier de 250 g/m² ou plus. Imprimer d’abord la planche 1 pour vérifier l’alignement."
   lignes_registre: 20
+
+translations:
+  en:
+    titre: "Drivers and Mathematicians: Eight Families"
+    chapeau: >-
+      Eight families, each a zipper: a driver's lived experience and a mathematician's,
+      questions asked across groups, a shared motif named together, a constraint to sort,
+      then a lever for joint action. Bridges connect families; two secret stakes test the alliance.
+    niveaux:
+      1: free
+      2: locked
+      3: action
+    detenteurs:
+      chauffeurs: Drivers
+      mathematiciens: Mathematicians
+      mixte: Mixed pair
+    tri_contraintes:
+      - code: M
+        nom: Misunderstanding
+        effet: A translation is enough; it may open a Bridge.
+      - code: D
+        nom: Disagreement
+        effet: Evidence is needed to remove the block.
+      - code: C
+        nom: Conflict
+        effet: Record it; naming it matters as much as resolving it.
+    phases:
+      - nom: Recognize
+        texte: "Read the Terrains and Researches. When both lived experiences in a family are on the table, reveal the Echo: ‘they rhyme’."
+      - nom: Explore
+        texte: "When the Echo is on the table, each group asks its Question to the other. The two Questions reveal the Motif; the group names it."
+      - nom: Act together
+        texte: "The Motif reveals the Constraint; the Constraint reveals the Lever. Sort the Constraint as misunderstanding, disagreement, or conflict before playing the Lever. A Lever counts only if a Bridge touches its family. A Constraint placed on a Bridge and sorted as a conflict makes it a false Bridge; leave it on the table, marked."
+      - nom: Debrief
+        texte: "The group wins together by opening at least {leviers} Levers. Then turn over both Stakes: do the Levers serve both groups? Photograph the Bridge network before packing up."
+    sections:
+      ponts:
+        lettre: B
+        theme: Bridges
+        intention: Four prewritten Bridges between families and four to invent. Each is revealed when both linked Motifs are on the table.
+      enjeux:
+        lettre: S
+        theme: Stakes
+        intention: One secret stake for each group. At the end, do the open Levers serve both?
+    impression:
+      consigne: Print A4 duplex, flip on the long edge, at 100% scale. Use paper of 250 gsm or heavier. Print one sheet first to check alignment.

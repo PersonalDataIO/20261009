@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="{{ story.language }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ story.theme }} · Vidéo</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root { color-scheme:light; --ink:#111; --paper:#eeeFEB; --driver:#00695c; --researcher:#b02748; }
+* { box-sizing:border-box; }
+body { margin:0; background:#252525; font-family:'Atkinson Hyperlegible',Verdana,sans-serif; }
+#stage { position:relative; width:1080px; height:1920px; overflow:hidden; background:var(--paper); color:var(--ink); transform-origin:top left; }
+.grid { position:absolute; inset:0; background-image:linear-gradient(#11111109 1px,transparent 1px),linear-gradient(90deg,#11111109 1px,transparent 1px); background-size:60px 60px; }
+header { position:absolute; left:90px; right:150px; top:160px; display:flex; align-items:center; gap:28px; border-bottom:4px solid var(--ink); padding-bottom:30px; }
+.number { border:5px solid var(--ink); width:100px; height:100px; display:grid; place-items:center; font:900 68px Archivo,Verdana,sans-serif; }
+.series { font-size:28px; font-weight:700; }
+.family { margin-top:8px; font:900 46px Archivo,Verdana,sans-serif; }
+.scene { position:absolute; left:90px; right:150px; top:420px; height:1090px; display:flex; flex-direction:column; justify-content:center; visibility:hidden; }
+.label { margin-bottom:35px; font-size:32px; font-weight:700; }
+.headline { font:900 76px/1.13 Archivo,Verdana,sans-serif; margin:0; overflow-wrap:break-word; }
+.intro .headline { font-size:100px; }
+.explanation .headline,.cta .headline { font-size:80px; }
+.explanation .detail { font-size:42px; line-height:1.45; }
+.cta-link { display:block; margin-top:50px; font-size:38px; line-height:1.35; overflow-wrap:anywhere; }
+.proposal-list { display:grid; gap:18px; margin-top:34px; }
+.proposal { border:3px solid var(--ink); border-radius:8px; background:#fff; padding:18px 24px; font-size:30px; line-height:1.25; }
+.proposal p { margin:0; }
+.proposal a { display:inline-block; margin-top:10px; font-size:28px; font-weight:700; }
+a { color:inherit; text-underline-offset:8px; }
+.cta .headline a { text-decoration:none; }
+a:focus-visible { outline:4px solid var(--ink); outline-offset:8px; }
+.detail { font-size:38px; line-height:1.4; margin:40px 0 0; }
+.card-scene { justify-content:flex-start; gap:24px; }
+.type-box { flex:none; border:4px solid var(--ink); border-radius:8px; background:#fff; padding:22px 32px; }
+.type-box b { display:block; font:900 34px/1.2 Archivo,Verdana,sans-serif; }
+.type-box .label { margin:10px 0 0; font-size:28px; }
+.direction { display:grid; gap:6px; margin-top:12px; font-size:28px; line-height:1.3; }
+.video-card { border:4px solid var(--ink); border-radius:8px; padding:42px; background:#fff; flex:1; min-height:0; display:flex; flex-direction:column; justify-content:center; }
+.video-card .headline { font-size:52px; line-height:1.16; }
+.video-card .detail { font-size:40px; line-height:1.42; margin-top:32px; white-space:pre-line; }
+.driver .type-box { border-left:12px solid var(--driver); }
+.researcher .type-box { border-left:12px solid var(--researcher); }
+.driver .type-box b { color:var(--driver); }
+.researcher .type-box b { color:var(--researcher); }
+footer { position:absolute; left:90px; right:150px; bottom:250px; border-top:4px solid var(--ink); padding-top:25px; font-size:30px; }
+.progress { position:absolute; bottom:210px; left:90px; width:840px; height:7px; background:#1112; }
+.progress span { display:block; height:100%; background:var(--ink); transform-origin:left; }
+.draft { position:absolute; top:35px; left:90px; font-size:24px; font-weight:700; color:#a32323; }
+@media (prefers-reduced-motion:reduce) { body { scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+<main id="stage" aria-label="{{ story.ui.video_aria }} {{ story.theme }}">
+  <div class="grid"></div>
+  <header><div class="number">{{ story.family }}</div><div><div class="series">{{ story.ui.video_series }}</div><div class="family">{{ story.theme }}</div></div></header>
+  {% for scene in story.scenes %}
+  <section class="scene {{ scene.kind }}{% if scene.card is defined %} card-scene{% endif %}" data-start="{{ scene.start }}" data-end="{{ scene.end }}" aria-hidden="true">
+    {% if scene.card is defined %}
+    <div class="type-box">
+      <b>{{ scene.type_name }}</b>
+      {% if scene.sender %}<div class="direction"><span>{{ 'From' if story.language == 'en' else 'De' }} : {{ scene.sender }}</span><span>{{ 'To' if story.language == 'en' else 'Pour' }} : {{ scene.recipient }}</span></div>
+      {% else %}<div class="label">{{ scene.label }}</div>{% endif %}
+    </div>
+    <article class="video-card"><h1 class="headline">{{ scene.text }}</h1><p class="detail">{{ scene.detail }}</p></article>
+    {% else %}
+    <div class="label">{{ scene.label }}</div>
+    <h1 class="headline">{% if scene.kind == 'cta' %}<a href="{{ story.url }}">{{ scene.text }}</a>{% else %}{{ story.theme if scene.kind == 'intro' else scene.text }}{% endif %}</h1>
+    {% if scene.kind == 'intro' %}<p class="detail">{{ scene.text }}</p>{% endif %}
+    {% if scene.detail %}<p class="detail">{{ scene.detail }}</p>{% endif %}
+    {% if scene.proposals is defined and scene.proposals %}<div class="proposal-list">{% for proposal in scene.proposals %}<div class="proposal"><p>{{ proposal.text }}</p><a href="{{ story.url }}">Contact us</a></div>{% endfor %}</div>{% endif %}
+    {% if scene.kind == 'cta' %}<a class="cta-link" href="{{ story.url }}">{{ story.url }}</a>{% endif %}
+    {% endif %}
+  </section>
+  {% endfor %}
+  <footer><a href="{{ story.url }}">{{ story.url | replace('https://', '') | replace('http://', '') | trim('/') }}</a></footer>
+  <div class="progress"><span></span></div>
+  {% if story.draft %}<div class="draft">{{ story.ui.video_draft }}</div>{% endif %}
+</main>
+<script>
+const duration = {{ story.duration | tojson }};
+const scenes = [...document.querySelectorAll('.scene')];
+const stage = document.querySelector('#stage');
+const exporting = new URLSearchParams(location.search).has('export');
+function fit() {
+  stage.style.transform = `scale(${Math.min(innerWidth / 1080, innerHeight / 1920)})`;
+}
+window.renderFrame = function(seconds) {
+  const time = Math.max(0, Math.min(seconds, duration - 0.00001));
+  let progress = 0;
+  for (const scene of scenes) {
+    const start = Number(scene.dataset.start);
+    const end = Number(scene.dataset.end);
+    const active = time >= start && time < end;
+    scene.style.visibility = active ? 'visible' : 'hidden';
+    scene.setAttribute('aria-hidden', String(!active));
+    if (!active) continue;
+    progress = start / duration;
+    const entry = Math.min(1, (time - start) / 0.65);
+    const eased = 1 - Math.pow(1 - entry, 3);
+    const exit = Math.min(1, (end - time) / 0.25);
+    scene.style.opacity = String(Math.min(eased, exit));
+    scene.style.transform = `translateY(${(1 - eased) * 65}px)`;
+  }
+  document.querySelector('.progress span').style.transform = `scaleX(${progress})`;
+};
+fit();
+addEventListener('resize', fit);
+window.renderFrame(1);
+if (!exporting && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const start = performance.now();
+  function tick(now) { window.renderFrame(((now - start) / 1000) % duration); requestAnimationFrame(tick); }
+  requestAnimationFrame(tick);
+}
+</script>
+</body>
+</html>

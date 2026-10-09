@@ -1,6 +1,10 @@
 ---
 numero: 6
 theme: "Reconnaissance"
+translations:
+  en:
+    theme: Recognition
+    intention: "Who is recognized as knowledgeable when a system absorbs know-how?"
 ---
 
 ## Intention
@@ -16,6 +20,13 @@ titre: « Je ne suis qu’un chauffeur »
 note: Faire nommer trois savoir-faire que la note ignore.
 a_verifier: false
 sources: []
+translations:
+  en:
+    titre: “I’m just a driver”
+    note: Name three skills that the rating does not see.
+    text: >-
+      I know every shortcut, can read a customer in three seconds, and handle tough
+      nights. To the app, I’m interchangeable. My rating is the only trace of my work.
 ```
 
 Je connais chaque raccourci, je lis un client en trois secondes, je gère les soirées difficiles. Pour l’appli, je suis interchangeable. Ma note est la seule trace de mon métier.
@@ -30,6 +41,14 @@ note: Demander aux chauffeurs si « superviseur de machine » leur rappelle quel
   chose.
 a_verifier: false
 sources: []
+translations:
+  en:
+    titre: “They’ll say I only asked the question”
+    note: Ask drivers whether “machine supervisor” means anything to them.
+    text: >-
+      If a model finds the proof I was looking for, what remains of my work? Choosing
+      the problem, checking, understanding. I fear that role will be seen as merely
+      operating a machine.
 ```
 
 Si un modèle trouve la preuve que je cherchais, que reste-t-il de mon travail ? Avoir choisi le problème, vérifié, compris. J’ai peur que ce rôle soit vu comme du simple pilotage de machine.
@@ -43,6 +62,13 @@ titre: Comment savez-vous qui a eu l’idée ?
 note: Expliquer en une phrase pourquoi les citations comptent pour obtenir un poste.
 a_verifier: false
 sources: []
+translations:
+  en:
+    titre: How do you know who had the idea?
+    note: Explain in one sentence why citations matter for getting a job.
+    text: >-
+      No one asks who found the right place to wait. Citations trace who thought of
+      what in your field. Does that still work when an AI takes part?
 ```
 
 Chez nous, personne ne demande qui a trouvé le bon endroit où attendre. Chez vous, les citations tracent qui a pensé quoi. Est-ce que ça marche encore quand une IA participe ?
@@ -56,6 +82,11 @@ titre: Qu’est-ce qui fait un bon chauffeur ?
 note: 'Noter les savoir-faire cités : ils nourrissent le Levier.'
 a_verifier: false
 sources: []
+translations:
+  en:
+    titre: What makes a good driver?
+    note: Record the skills people name; they can feed into the Lever.
+    text: Not according to the rating—according to your colleagues. Who recognizes your skill, and how can they see it?
 ```
 
 Pas selon la note : selon vos collègues. Qui reconnaît votre savoir-faire, et à quoi le voit-on ?
@@ -68,10 +99,20 @@ type: C
 titre: 'Signé : OpenAI'
 note: 'À trier. Poser la question : qui répond d’une erreur signée par une entreprise
   ?'
-a_verifier: true
+a_verifier: false
 sources:
   - https://openai.com/index/sharing-ai-progress-in-mathematics/
   - https://www.scientificamerican.com/article/openai-unleashes-hundreds-more-math-results-upon-a-field-already-in-shock/
+translations:
+  en:
+    titre: "Signed: OpenAI"
+    note: "Sort it. Ask: who answers for an error signed by a company?"
+    text: >-
+      On the night of October 6–7, 2026, OpenAI published 372 results concerning 377
+      open problems on GitHub, produced, the company says, by a non-public internal
+      model. Several proofs are formalized in Lean, but the manuscripts still need
+      review by the mathematical community. Who signs these results, who checks
+      them, and who answers for an error?
 ```
 
 Dans la nuit du 6 au 7 octobre 2026, OpenAI a publié sur GitHub 372 résultats concernant 377 problèmes ouverts, produits selon l’entreprise par un modèle interne non public. Plusieurs preuves sont formalisées en Lean, mais les manuscrits restent à examiner par la communauté mathématique. Qui signe ces résultats, qui les vérifie et qui répond d’une erreur ?
@@ -85,6 +126,13 @@ titre: Un métier réduit à une note ou à une consigne
 note: Vérifier que les deux groupes se reconnaissent dans la même phrase.
 a_verifier: false
 sources: []
+translations:
+  en:
+    titre: A profession reduced to a rating or a prompt
+    note: Check that both groups recognize themselves in the same sentence.
+    text: >-
+      The driver becomes an operator, the researcher a machine supervisor. In both
+      cases, the system absorbs the know-how and credit shifts to whoever owns it.
 ```
 
 Le chauffeur devient un exécutant, le chercheur un superviseur de machine. Dans les deux cas, le savoir-faire est absorbé par le système et le crédit glisse vers celui qui le possède.
@@ -98,6 +146,14 @@ titre: Le crédit suit-il la valeur ?
 note: Relier aux familles 1 (le savoir tacite) et 5 (la valeur captée).
 a_verifier: false
 sources: []
+translations:
+  en:
+    titre: Does credit follow value?
+    note: Link to families 1 (tacit knowledge) and 5 (value captured).
+    text: >-
+      When a system absorbs know-how, the value remains but recognition disappears.
+      Tracing an idea or a route back to its source becomes difficult; without a
+      record, there can be no credit.
 ```
 
 Quand un système absorbe un savoir-faire, la valeur reste mais la reconnaissance part. Remonter à la source d’une idée ou d’un trajet devient difficile, et sans traçabilité, pas de crédit possible.
@@ -112,6 +168,14 @@ note: Chercher une organisation précise où porter le texte, et une personne po
   faire.
 a_verifier: false
 sources: []
+translations:
+  en:
+    titre: Write down what no machine credits
+    note: Find a specific organization to take the text to, and someone to do it.
+    text: >-
+      Write together what a good driver and a good researcher know how to do that no
+      system recognizes. Take it to a professional association, scholarly society,
+      or training program.
 ```
 
 Rédiger ensemble ce qu’un bon chauffeur et un bon chercheur savent faire et qu’aucun système ne reconnaît. Le porter à une association professionnelle, une société savante ou une formation.

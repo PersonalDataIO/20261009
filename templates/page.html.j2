@@ -3,7 +3,7 @@
     + vue Impression (templates/print.html.j2). Un seul fichier autonome.
 =================================================================== -#}
 <!doctype html>
-<html lang="fr">
+<html lang="{{ language }}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -20,6 +20,7 @@
 <div class="app">
   <div class="site-banner"><a href="https://20261009.personaldata.io/">https://20261009.personaldata.io/</a></div>
   <header class="top">
+    <div class="language-row"><a class="language-switch" href="{{ language_switch_href }}" hreflang="{{ 'en' if language == 'fr' else 'fr' }}">{{ ui.language_switch }}</a></div>
     <h1>{{ cfg.titre|t }}</h1>
     <p class="lede">{{ cfg.chapeau|t }}</p>
     <ul class="nav">
@@ -27,22 +28,26 @@
       <li><a href="#ch-{{ s.key }}"><b>{{ s.key }}</b><span>{{ s.theme|t }}</span></a></li>
     {% endfor %}
     </ul>
+    <details class="video-library">
+      <summary>{{ video_heading }}</summary>
+      <ul>{% for s in deck.sections if s.numero is not none %}<li><a href="{{ family_videos[s.key] }}" download>{{ video_download_label }} · {{ s.theme|t }} (MP4)</a></li>{% endfor %}</ul>
+    </details>
     <div class="bar">
-      <div class="tabs" role="group" aria-label="Vue">
-        <button type="button" id="tab-play" aria-pressed="true">Partie</button>
-        <button type="button" id="tab-print-3x3" aria-pressed="false">Impression 3x3</button>
-        <button type="button" id="tab-print-2x2" aria-pressed="false">Impression 2x2</button>
-        <button type="button" id="tab-print-2x1" aria-pressed="false">Impression 2x1</button>
-        <button type="button" id="tab-review" aria-pressed="false">Review</button>
+      <div class="tabs" role="group" aria-label="{{ ui.tab_group }}">
+        <button type="button" id="tab-play" aria-pressed="true">{{ ui.tab_play }}</button>
+        <button type="button" id="tab-print-3x3" aria-pressed="false">{{ ui.tab_print_3x3 }}</button>
+        <button type="button" id="tab-print-2x2" aria-pressed="false">{{ ui.tab_print_2x2 }}</button>
+        <button type="button" id="tab-print-2x1" aria-pressed="false">{{ ui.tab_print_2x1 }}</button>
+        <button type="button" id="tab-review" aria-pressed="false">{{ ui.tab_review }}</button>
       </div>
       <span id="play-ctrls" style="display:flex;flex-wrap:wrap;gap:8px">
-        <button type="button" class="ctrl" id="btn-all" aria-pressed="false">Tout révéler</button>
-        <button type="button" class="ctrl" id="btn-notes" aria-pressed="false">Notes animateur</button>
-        <button type="button" class="ctrl" id="btn-reset">Recommencer</button>
+        <button type="button" class="ctrl" id="btn-all" aria-pressed="false">{{ ui.show_all }}</button>
+        <button type="button" class="ctrl" id="btn-notes" aria-pressed="false">{{ ui.show_notes }}</button>
+        <button type="button" class="ctrl" id="btn-reset">{{ ui.reset }}</button>
       </span>
       <span id="print-ctrls" style="display:none;flex-wrap:wrap;gap:8px;align-items:center">
-        <button type="button" class="ctrl primary" id="btn-print">Imprimer</button>
-        <span class="hint">{{ cfg.impression.consigne|t }} Si le bouton ne répond pas, utilisez Ctrl + P ou Cmd + P.</span>
+        <button type="button" class="ctrl primary" id="btn-print">{{ ui.print }}</button>
+        <span class="hint">{{ cfg.impression.consigne|t }} {{ ui.print_help_suffix }}</span>
       </span>
       <span class="progress" id="progress"></span>
     </div>

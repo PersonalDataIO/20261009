@@ -15,6 +15,10 @@ types:
   tenue_par: chauffeurs
   description: Une situation vécue par un chauffeur, à la première personne.
   serrure: []
+  translations:
+    en:
+      nom: Driver
+      description: A situation experienced by a driver, in the first person.
 - code: R
   nom: Recherche
   lettre: R
@@ -22,6 +26,10 @@ types:
   tenue_par: mathematiciens
   description: Une situation vécue par un mathématicien, à la première personne.
   serrure: []
+  translations:
+    en:
+      nom: Research
+      description: A situation experienced by a mathematician, in the first person.
 - code: Qc
   nom: Question
   code_affiche: cQm
@@ -32,6 +40,10 @@ types:
   description: 'cQm : les chauffeurs posent une question aux mathématiciens. Se révèle avec l’Écho (E). Tenue par les chauffeurs : on ne peut faire avancer la famille qu’en demandant à l’autre groupe.'
   serrure:
   - E
+  translations:
+    en:
+      nom: Question
+      description: 'cQm: drivers ask a question of mathematicians. Reveals with the Echo (E). Held by drivers: the family can advance only by asking the other group.'
 - code: Qm
   nom: Question
   code_affiche: mQc
@@ -42,6 +54,10 @@ types:
   description: 'mQc : les mathématiciens posent une question aux chauffeurs. Se révèle avec l’Écho (E). Tenue par les mathématiciens.'
   serrure:
   - E
+  translations:
+    en:
+      nom: Question
+      description: 'mQc: mathematicians ask a question of drivers. Reveals with the Echo (E). Held by mathematicians.'
 - code: C
   nom: Contrainte
   lettre: C
@@ -50,6 +66,10 @@ types:
   description: 'Un fait, une règle ou un argument adverse qui bloque le Levier. Se révèle avec le Motif (M) ; la table la trie : malentendu, désaccord ou conflit.'
   serrure:
   - M
+  translations:
+    en:
+      nom: Constraint
+      description: A fact, rule, or opposing argument that blocks the Lever. Reveals with the Motif (M); the group sorts it as misunderstanding, disagreement, or conflict.
 - code: E
   nom: Écho
   lettre: E
@@ -59,6 +79,10 @@ types:
   serrure:
   - T
   - R
+  translations:
+    en:
+      nom: Echo
+      description: The moment when the two lived experiences rhyme.
 - code: M
   nom: Motif
   lettre: M
@@ -68,6 +92,10 @@ types:
   serrure:
   - Qc
   - Qm
+  translations:
+    en:
+      nom: Motif
+      description: The shared motif, named after both Questions are asked.
 - code: L
   nom: Levier
   lettre: L
@@ -76,15 +104,27 @@ types:
   description: Une action commune, révélée avec la Contrainte (C), puis jouée après son tri.
   serrure:
   - C
+  translations:
+    en:
+      nom: Lever
+      description: A joint action, revealed with the Constraint (C), then played after it has been sorted.
 - code: P
   nom: Pont
   lettre: P
   niveau: 2
   tenue_par: mixte
   description: Relie deux familles. Une moitié écrite par un chauffeur, l’autre par un mathématicien.
+  translations:
+    en:
+      nom: Bridge
+      description: Connects two families. One half is written by a driver, the other by a mathematician.
 - code: J
   nom: Enjeu
   lettre: J
   niveau: 1
   tenue_par: null
   description: Ce dont chaque groupe a besoin de l’alliance. Rempli en secret au début, retourné à la fin.
+  translations:
+    en:
+      nom: Stake
+      description: What each group needs from the alliance. Filled in secretly at the start and turned over at the end.

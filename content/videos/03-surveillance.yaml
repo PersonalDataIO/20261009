@@ -1,0 +1,68 @@
+family: 3
+slug: 03-surveillance
+url: https://20261009.personaldata.io/
+scenes:
+  - duration: 3
+    kind: intro
+    label: Chauffeurs et mathématiciens
+    text: Quand la vérification devient contrôle et transforme le métier
+    translations:
+      en:
+        label: Drivers and Mathematicians
+        text: When verification becomes control and transforms the work
+  - duration: 7
+    kind: driver
+    card: 3T
+    label: Chauffeur
+    translations:
+      en:
+        label: Driver
+  - duration: 7
+    kind: researcher
+    card: 3R
+    label: Mathématicien
+    translations:
+      en:
+        label: Mathematician
+  - duration: 7
+    kind: echo
+    card: 3E
+    label: Un vécu commun
+    translations:
+      en:
+        label: A shared experience
+  - duration: 7
+    kind: question
+    card: 3Qc
+    label: Chauffeurs vers mathématiciens
+    translations:
+      en:
+        label: Drivers to mathematicians
+  - duration: 7
+    kind: question
+    card: 3Qm
+    label: Mathématiciens vers chauffeurs
+    translations:
+      en:
+        label: Mathematicians to drivers
+  - duration: 7
+    kind: tension
+    card: 3M
+    label: Travailler pour la mesure
+    translations:
+      en:
+        label: Working for the metric
+  - duration: 7
+    kind: tension
+    card: 3C
+    label: La vérification protège aussi
+    translations:
+      en:
+        label: Verification can protect, too
+  - duration: 7
+    kind: action
+    card: 3L
+    label: Un levier commun
+    translations:
+      en:
+        label: A shared lever

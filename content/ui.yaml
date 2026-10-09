@@ -1,0 +1,204 @@
+fr:
+  language_name: Français
+  language_switch: English
+  app_title: Chauffeurs et mathématiciens
+  language_name: Français
+  tab_group: Vue
+  tab_play: Partie
+  tab_print_3x3: Impression 3x3
+  tab_print_2x2: Impression 2x2
+  tab_print_2x1: Impression 2x1
+  tab_review: Review
+  show_all: Tout révéler
+  show_notes: Notes animateur
+  reset: Recommencer
+  print: Imprimer
+  print_help_suffix: Si le bouton ne répond pas, utilisez Ctrl + P ou Cmd + P.
+  cards_progress: "{on}/{total} cartes sur la table"
+  lever_progress_one: "{on}/{total} levier"
+  lever_progress_many: "{on}/{total} Leviers"
+  goal_reached: objectif atteint
+  reveal_card: Retourner la carte
+  place_card: Poser sur la table
+  remove_card: Sur la table (retirer)
+  missing_cards: Il manque
+  is_on_table: est sur la table
+  are_on_table: sont sur la table
+  unlock_one: Se révèle quand
+  unlock_many: Se révèle quand
+  free_card: Carte libre, à lire dès le départ.
+  card_aria: Carte
+  back_aria: Verso de la carte
+  for_holder: "Pour :"
+  held_by: "Tenue par :"
+  one_per_group: Une par groupe.
+  reveals_with: Se révèle avec
+  bridge_reveals_with: Se révèle avec les deux Motifs reliés
+  and_word: et
+  drivers_to_mathematicians: Chauffeurs → matheux
+  mathematicians_to_drivers: Matheux → chauffeurs
+  board_aria: Parcours des cartes
+  chauffeur: Chauffeur
+  mathematician: Mathématicien
+  link_families: Relie les familles ____ et ____.
+  level_card: carte
+  level_free: libre
+  level_locked: verrouillée
+  level_action: d’action
+  legend_intro: "{cards} cartes. Chaque famille thématique compte {families} cartes qui s’activent les unes les autres, des vécus de chaque groupe jusqu’à un Levier d’action commune. Chaque carte porte une lettre (son type) et un numéro (sa famille) : 4M est le Motif de la famille 4."
+  walkthrough: Déroulé
+  card_types: Types de cartes
+  families: Familles
+  printing: Impression
+  transition_title: Transitions de jeu
+  transition_intro: Dans chaque famille, les cartes se révèlent au fil des échanges. Les Ponts relient les familles et conditionnent la victoire.
+  phase_recognize: Reconnaître
+  phase_explore: Éprouver et nommer
+  phase_act: Agir ensemble
+  phase_summary: Bilan
+  lived_experiences: "Les deux vécus d’une famille sont posés sur la table : ils révèlent l’Écho."
+  questions_reveal: Les Questions se révèlent avec l’Écho. Le Motif s’ouvre quand les deux Questions sont sur la table; la table le nomme.
+  constraint_lever: Le Motif révèle la Contrainte; la Contrainte révèle le Levier. Trier la Contrainte avant de jouer le Levier.
+  lever_touches_family: Un Levier ne compte que si un Pont touche sa famille.
+  bridge: Pont
+  false_bridge: Faux pont
+  bridge_unlock: Se révèle quand les deux Motifs reliés sont sur la table.
+  false_bridge_rule: Une Contrainte posée sur un Pont et triée en conflit le marque comme faux ; il reste sur la table.
+  victory: Victoire commune
+  victory_check: Vérifier que les Leviers servent les deux groupes, retourner les deux Enjeux et photographier le réseau de Ponts.
+  review_label: REVIEW · FAMILLE
+  review_stage_1: Faire apparaître l’Écho
+  two_experiences: Deux vécus sur la table
+  review_stage_2: Nommer le Motif
+  each_group_asks: Chaque groupe interroge l’autre
+  review_questions_prerequisite: Les Questions se révèlent avec l’Écho. Le Motif s’ouvre quand les deux Questions sont sur la table.
+  review_stage_3: Passer à l’action
+  constraint_sorted: La Contrainte est triée collectivement
+  review_action_prerequisite: La Contrainte révèle le Levier; trier la Contrainte avant de jouer le Levier.
+  victory_condition: Condition de victoire
+  this_lever_counts: Ce Levier compte si un Pont touche la famille
+  open_at_least: Ouvrir au moins
+  then_reveal_issues: Leviers, puis retourner les deux Enjeux.
+  moderator_notes: Notes d’animation
+  facilitator_sheet: Fiche animateur
+  facilitator_intro: À garder pour soi. Chaque ligne donne la carte, qui la tient, ce qu’il faut pour l’ouvrir et une piste de relance. « À vérifier » signale un fait à faire relire avant l’atelier.
+  card_column: Carte
+  title_column: Titre
+  holder_column: Tenue par
+  lock_column: Serrure
+  prompt_column: Relance
+  verify_label: à vérifier
+  free_lock: libre
+  conflict_register: Registre des conflits
+  conflict_intro: Chaque Contrainte posée est triée. Les conflits restent ici, nommés, même quand la partie continue. Cocher aussi les faux ponts.
+  conflict_card: Carte
+  conflict_sort: Tri
+  conflict_sentence: Le conflit, en une phrase
+  conflict_owner: Qui le porte
+  print_instruction: Impression A4 recto verso, retournement sur le bord long, échelle 100 %. Papier de 250 g/m² ou plus. Imprimer d’abord une planche pour vérifier l’alignement.
+  video_aria: Vidéo de la famille
+  video_series: Chauffeurs et mathématiciens
+  video_cards_aria: Les huit cartes
+  video_draft: BROUILLON · Vérification éditoriale requise
+en:
+  language_name: English
+  language_switch: Français
+  app_title: Drivers and Mathematicians
+  language_name: English
+  tab_group: View
+  tab_play: Play
+  tab_print_3x3: Print 3x3
+  tab_print_2x2: Print 2x2
+  tab_print_2x1: Print 2x1
+  tab_review: Review
+  show_all: Reveal all
+  show_notes: Facilitator notes
+  reset: Reset
+  print: Print
+  print_help_suffix: If the button does not respond, use Ctrl + P or Cmd + P.
+  cards_progress: "{on}/{total} cards on the table"
+  lever_progress_one: "{on}/{total} lever"
+  lever_progress_many: "{on}/{total} levers"
+  goal_reached: goal reached
+  reveal_card: Turn over card
+  place_card: Put on table
+  remove_card: On table (remove)
+  missing_cards: Missing
+  is_on_table: is on the table
+  are_on_table: are on the table
+  unlock_one: Reveals when
+  unlock_many: Reveals when
+  free_card: Free card; read from the start.
+  card_aria: Card
+  back_aria: Back of card
+  for_holder: "For:"
+  held_by: "Held by:"
+  one_per_group: One per group.
+  reveals_with: Reveals with
+  bridge_reveals_with: Reveals when both linked Motifs are on the table
+  and_word: and
+  drivers_to_mathematicians: Drivers → mathematicians
+  mathematicians_to_drivers: Mathematicians → drivers
+  board_aria: Card progression
+  chauffeur: Driver
+  mathematician: Mathematician
+  link_families: Connects families ____ and ____.
+  level_card: card
+  level_free: free
+  level_locked: locked
+  level_action: action
+  legend_intro: "{cards} cards. Each thematic family contains {families} cards that unlock one another, from each group’s lived experience to a shared Lever. Each card has a letter (its type) and a number (its family): 4M is the Motif of family 4."
+  walkthrough: How to play
+  card_types: Card types
+  families: Families
+  printing: Printing
+  transition_title: Game transitions
+  transition_intro: Within each family, cards are revealed through conversation. Bridges connect families and help determine victory.
+  phase_recognize: Recognize
+  phase_explore: Explore and name
+  phase_act: Act together
+  phase_summary: Debrief
+  lived_experiences: Both lived experiences are on the table; together they reveal the Echo.
+  questions_reveal: Questions reveal with the Echo. The Motif reveals when both Questions are on the table; the group names it.
+  constraint_lever: The Motif reveals the Constraint; the Constraint reveals the Lever. Sort the Constraint before playing the Lever.
+  lever_touches_family: A Lever counts only if a Bridge touches its family.
+  bridge: Bridge
+  false_bridge: False bridge
+  bridge_unlock: Reveals when both linked Motifs are on the table.
+  false_bridge_rule: A Constraint placed on a Bridge and sorted as a conflict marks it as false; it stays on the table.
+  victory: Cooperative victory
+  victory_check: Check that the Levers serve both groups, turn over both Stakes, and photograph the Bridge network.
+  review_label: REVIEW · FAMILY
+  review_stage_1: Reveal the Echo
+  two_experiences: Both experiences on the table
+  review_stage_2: Name the Motif
+  each_group_asks: Each group asks the other
+  review_questions_prerequisite: Questions reveal with the Echo. The Motif reveals when both Questions are on the table.
+  review_stage_3: Act together
+  constraint_sorted: The Constraint is sorted together
+  review_action_prerequisite: The Constraint reveals the Lever; sort the Constraint before playing the Lever.
+  victory_condition: Victory condition
+  this_lever_counts: This Lever counts if a Bridge touches family
+  open_at_least: Open at least
+  then_reveal_issues: Levers, then turn over both Stakes.
+  moderator_notes: Facilitator notes
+  facilitator_sheet: Facilitator sheet
+  facilitator_intro: Keep this sheet for the facilitator. Each row lists the card, its holder, what unlocks it, and a prompt. “Verify” flags a claim to check before the workshop.
+  card_column: Card
+  title_column: Title
+  holder_column: Held by
+  lock_column: Unlock condition
+  prompt_column: Prompt
+  verify_label: verify
+  free_lock: free
+  conflict_register: Conflict log
+  conflict_intro: Sort every Constraint played. Keep conflicts named here, even as the game continues. Mark false Bridges too.
+  conflict_card: Card
+  conflict_sort: Sort
+  conflict_sentence: State the conflict in one sentence
+  conflict_owner: Who carries it
+  print_instruction: Print A4 duplex, flip on the long edge, at 100% scale. Use paper of 250 gsm or heavier. Print one sheet first to check alignment.
+  video_aria: Family video
+  video_series: Drivers and Mathematicians
+  video_cards_aria: The eight cards
+  video_draft: DRAFT · Editorial verification required

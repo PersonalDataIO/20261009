@@ -1,0 +1,68 @@
+family: 6
+slug: 06-reconnaissance
+url: https://20261009.personaldata.io/
+scenes:
+  - duration: 3
+    kind: intro
+    label: Chauffeurs et mathématiciens
+    text: Qui reçoit le crédit quand le système absorbe le savoir-faire ?
+    translations:
+      en:
+        label: Drivers and Mathematicians
+        text: Who gets the credit when the system absorbs know-how?
+  - duration: 7
+    kind: driver
+    card: 6T
+    label: Chauffeur
+    translations:
+      en:
+        label: Driver
+  - duration: 7
+    kind: researcher
+    card: 6R
+    label: Mathématicien
+    translations:
+      en:
+        label: Mathematician
+  - duration: 7
+    kind: echo
+    card: 6E
+    label: Un vécu commun
+    translations:
+      en:
+        label: A shared experience
+  - duration: 7
+    kind: question
+    card: 6Qc
+    label: Chauffeurs vers mathématiciens
+    translations:
+      en:
+        label: Drivers to mathematicians
+  - duration: 7
+    kind: question
+    card: 6Qm
+    label: Mathématiciens vers chauffeurs
+    translations:
+      en:
+        label: Mathematicians to drivers
+  - duration: 7
+    kind: tension
+    card: 6M
+    label: Le crédit suit-il la valeur ?
+    translations:
+      en:
+        label: Does credit follow value?
+  - duration: 7
+    kind: tension
+    card: 6C
+    label: Qui signe et qui répond des erreurs ?
+    translations:
+      en:
+        label: Who signs and who answers for errors?
+  - duration: 7
+    kind: action
+    card: 6L
+    label: Un levier commun
+    translations:
+      en:
+        label: A shared lever

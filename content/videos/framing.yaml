@@ -1,0 +1,32 @@
+opening:
+  duration: 8
+  kind: explanation
+  label: Pourquoi ce jeu ?
+  text: Deux métiers, une même IA.
+  detail: Faire converger les perspectives des chauffeurs Uber et des mathématiciens face à l'IA, pour comprendre leurs enjeux communs et agir ensemble.
+  translations:
+    en:
+      label: Why this game?
+      text: Two professions, one AI.
+      detail: Bring Uber drivers' and mathematicians' perspectives on AI together, to understand their shared challenges and act together.
+closing:
+  duration: 12
+  kind: cta
+  label: Chauffeurs et mathématiciens
+  text: Explore the game!
+  proposals:
+    - text: Want to play with Uber drivers in your city?
+      translations:
+        fr:
+          text: Tu veux jouer avec des chauffeurs Uber dans ta ville ?
+    - text: Want to play with your math department?
+      translations:
+        fr:
+          text: Tu veux jouer avec ton département de mathématiques ?
+    - text: Want to hold a workshop in Geneva?
+      translations:
+        fr:
+          text: Tu veux organiser un atelier à Genève ?
+  translations:
+    en:
+      label: Drivers and Mathematicians

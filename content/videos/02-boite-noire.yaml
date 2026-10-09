@@ -1,0 +1,68 @@
+family: 2
+slug: 02-boite-noire
+url: https://20261009.personaldata.io/
+scenes:
+  - duration: 3
+    kind: intro
+    label: Chauffeurs et mathématiciens
+    text: Une décision sans raisons, une preuve sans compréhension
+    translations:
+      en:
+        label: Drivers and Mathematicians
+        text: A decision without reasons, a proof without understanding
+  - duration: 7
+    kind: driver
+    card: 2T
+    label: Chauffeur
+    translations:
+      en:
+        label: Driver
+  - duration: 7
+    kind: researcher
+    card: 2R
+    label: Mathématicien
+    translations:
+      en:
+        label: Mathematician
+  - duration: 7
+    kind: echo
+    card: 2E
+    label: Un vécu commun
+    translations:
+      en:
+        label: A shared experience
+  - duration: 7
+    kind: question
+    card: 2Qc
+    label: Chauffeurs vers mathématiciens
+    translations:
+      en:
+        label: Drivers to mathematicians
+  - duration: 7
+    kind: question
+    card: 2Qm
+    label: Mathématiciens vers chauffeurs
+    translations:
+      en:
+        label: Mathematicians to drivers
+  - duration: 7
+    kind: tension
+    card: 2M
+    label: Le mécanisme de l’opacité
+    translations:
+      en:
+        label: How opacity works
+  - duration: 7
+    kind: tension
+    card: 2C
+    label: Le secret des affaires
+    translations:
+      en:
+        label: Trade secrecy
+  - duration: 7
+    kind: action
+    card: 2L
+    label: Un levier commun
+    translations:
+      en:
+        label: A shared lever

@@ -1,0 +1,68 @@
+family: 5
+slug: 05-extraction
+url: https://20261009.personaldata.io/
+scenes:
+  - duration: 3
+    kind: intro
+    label: Chauffeurs et mathématiciens
+    text: Tous nourrissent le système, seuls certains possèdent les machines
+    translations:
+      en:
+        label: Drivers and Mathematicians
+        text: Everyone feeds the system, only some own the machines
+  - duration: 7
+    kind: driver
+    card: 5T
+    label: Chauffeur
+    translations:
+      en:
+        label: Driver
+  - duration: 7
+    kind: researcher
+    card: 5R
+    label: Mathématicien
+    translations:
+      en:
+        label: Mathematician
+  - duration: 7
+    kind: echo
+    card: 5E
+    label: Un vécu commun
+    translations:
+      en:
+        label: A shared experience
+  - duration: 7
+    kind: question
+    card: 5Qc
+    label: Chauffeurs vers mathématiciens
+    translations:
+      en:
+        label: Drivers to mathematicians
+  - duration: 7
+    kind: question
+    card: 5Qm
+    label: Mathématiciens vers chauffeurs
+    translations:
+      en:
+        label: Mathematicians to drivers
+  - duration: 7
+    kind: tension
+    card: 5M
+    label: L’asymétrie de calcul
+    translations:
+      en:
+        label: The computing-power imbalance
+  - duration: 7
+    kind: tension
+    card: 5C
+    label: Qui a consenti ?
+    translations:
+      en:
+        label: Who consented?
+  - duration: 7
+    kind: action
+    card: 5L
+    label: Un levier commun
+    translations:
+      en:
+        label: A shared lever

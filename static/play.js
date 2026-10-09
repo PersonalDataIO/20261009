@@ -5,6 +5,7 @@
    ===================================================================== */
 const DATA = JSON.parse(document.getElementById("deck-data").textContent);
 const CARDS = DATA.cards;
+const UI = DATA.ui;
 const state = {table: new Set(), revealed: new Set(), all: false, notes: false, fresh: null};
 
 const displayId = id => id.endsWith("Qc") ? `${id.slice(0, -2)}cQm` : id.endsWith("Qm") ? `${id.slice(0, -2)}mQc` : id;
@@ -24,12 +25,12 @@ function actionFor(c){
   if (!isRevealed(c)){
     const miss = c.lock.filter(k => !state.table.has(k));
     return miss.length
-      ? `<p class="missing">Il manque ${miss.map(keyHTML).join(" ")} sur la table</p>`
-      : `<button type="button" class="act strong" data-act="reveal" data-id="${c.id}">Retourner la carte</button>`;
+      ? `<p class="missing">${UI.missing_cards} ${miss.map(keyHTML).join(` ${UI.and_word} `)}</p>`
+      : `<button type="button" class="act strong" data-act="reveal" data-id="${c.id}">${UI.reveal_card}</button>`;
   }
   return state.table.has(c.id)
-    ? `<button type="button" class="act on" data-act="remove" data-id="${c.id}" aria-pressed="true">Sur la table (retirer)</button>`
-    : `<button type="button" class="act" data-act="place" data-id="${c.id}" aria-pressed="false">Poser sur la table</button>`;
+    ? `<button type="button" class="act on" data-act="remove" data-id="${c.id}" aria-pressed="true">${UI.remove_card}</button>`
+    : `<button type="button" class="act" data-act="place" data-id="${c.id}" aria-pressed="false">${UI.place_card}</button>`;
 }
 
 function slotFor(c){
@@ -43,6 +44,7 @@ function renderPlay(){
   DATA.sections.forEach(s => {
     const sectionCards = CARDS.filter(c => c.section === s.key);
     html += `<section class="chain" id="ch-${s.key}"><div class="chain-head"><span class="num">${s.key}</span><div><h2>${s.theme}</h2><p>${s.intention}</p></div></div>`;
+    if (s.video) html += `<p class="video-download"><a href="${s.video}" download>${DATA.video_download_label} · ${s.theme} (MP4)</a></p>`;
     if (/^\d+$/.test(s.key)){
       const byType = new Map(sectionCards.map(c => [c.type, c]));
       const stages = [["T", "R"], ["E"], ["Qm", "Qc"], ["M"], ["C"], ["L"]];
@@ -62,9 +64,11 @@ function renderPlay(){
   fit(play);
   state.fresh = null;
   const lev = CARDS.filter(c => c.type === "L" && state.table.has(c.id)).length;
-  const goal = lev >= DATA.leviers.pour_gagner ? " : objectif atteint" : "";
-  document.getElementById("progress").textContent =
-    `${state.table.size} sur ${CARDS.length} cartes sur la table · ${lev} levier${lev > 1 ? "s" : ""} sur ${DATA.leviers.total}${goal}`;
+  const cardsProgress = UI.cards_progress.replace("{on}", state.table.size).replace("{total}", CARDS.length);
+  const leversProgress = (lev === 1 ? UI.lever_progress_one : UI.lever_progress_many)
+    .replace("{on}", lev).replace("{total}", DATA.leviers.total);
+  const goal = lev >= DATA.leviers.pour_gagner ? ` · ${UI.goal_reached}` : "";
+  document.getElementById("progress").textContent = `${cardsProgress} · ${leversProgress}${goal}`;
 }
 
 document.getElementById("play").addEventListener("click", e => {

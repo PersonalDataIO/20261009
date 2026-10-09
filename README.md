@@ -19,7 +19,19 @@ Ouvrir ensuite `dist/index.html` dans un navigateur (ou avec Live Server).
 
 Importer le dépôt dans Netlify en gardant la racine du dépôt comme base.
 `netlify.toml` installe les dépendances Python, exécute `python build.py` et
-publie le dossier `dist/`. Aucun framework ni commande supplémentaire n’est requis.
+publie le dossier `dist/`. Le build crée le site français à `/` et l’anglais à
+`/en/`. Aucun framework ni commande supplémentaire n’est requis.
+
+## Langues
+
+Le français est la langue source. Les traductions sont stockées près de leur
+contenu dans une map `translations`, indexée par code de langue. Le thème et
+l’intention d’une famille se traduisent dans son front matter; pour chaque carte,
+`titre`, `note` et `text` se traduisent dans son bloc YAML. Ponts et Enjeux
+utilisent la même map dans leur front matter. Les libellés partagés de l’interface
+et de l’impression sont dans `content/ui.yaml`; les phases, sections et consignes
+globales sont traduites dans `content/deck.yaml`. `python build.py` valide et
+génère les deux langues à partir des mêmes gabarits.
 
 ## Organisation
 
@@ -99,3 +111,98 @@ utile juste avant d’imprimer.
 `dist/dependances.md` s’ouvre avec l’aperçu Markdown de VS Code (extension Mermaid) pour voir le graphe des serrures.
 
 Voir `MANQUES.md` pour ce qui reste à faire.
+
+## Vidéos courtes
+
+Les huit familles ont des storyboards en français et en anglais. Les vidéos présentent une explication du but du jeu,
+deux témoignages, un Écho, les deux questions dirigées, un levier et un appel final
+« Explore the game! ». Le format vertical 1080 × 1920 fonctionne sans son, avec
+du texte intégré à l'image. Le rendu vidéo est indépendant de `build.py` et de Netlify.
+Les liens de téléchargement se trouvent dans « Vidéos des familles » en tête de page
+et sous chaque titre de famille. Ils ciblent toujours la langue de la page.
+Les MP4 finalisés sont conservés dans `public/videos/` ; `build.py` les copie
+dans `dist/videos/` pour les publier aussi sur Netlify, sans réencodage.
+Flair inclut aussi sa Contrainte. Chaque carte montre son titre et son texte complets,
+sans indice, avec une petite boîte de type au-dessus. Les questions indiquent
+explicitement leur expéditeur et leur destinataire. Les notes d'animation ne sont
+pas affichées. La durée de chaque carte est au moins celle du storyboard, allongée
+si nécessaire pour laisser trois secondes de transition et 150 mots/minute de lecture.
+
+Installation facultative, avec FFmpeg disponible dans le `PATH` :
+
+```bash
+pip install -r requirements-video.txt
+python -m playwright install chromium
+# macOS, si nécessaire : brew install ffmpeg
+python video.py --draft
+```
+
+Pour produire toutes les vidéos publiques et actualiser les fichiers publiables :
+
+```bash
+python video.py --all --language both --out public/videos
+python build.py
+```
+
+Le rendu réutilise les images fixes pendant la lecture et conserve les transitions
+animées. La progression avance au changement de scène.
+
+Les fichiers sont générés dans `dist/videos/` : MP4 H.264 à 24 images/seconde,
+affiche PNG, aperçu HTML animé, sous-titres SRT et storyboard JSON. L'aperçu HTML
+s'ouvre directement dans un navigateur, sans serveur. Les polices Google demandent
+une connexion Internet ; sans accès réseau, le navigateur utilise les polices de secours.
+L'aperçu respecte la préférence de réduction des animations.
+
+```bash
+python video.py --draft --preview-only  # aperçu sans Chromium ni FFmpeg
+python video.py --draft --width 540     # export léger
+python -m unittest discover -s tests -p 'test_video.py'
+```
+
+Le storyboard éditorial vit dans `content/videos/01-flair.yaml`. Une scène indique
+sa durée minimale, son type (`intro`, `driver`, `researcher`, `echo`, `question`,
+`tension`, `action`) et éventuellement l'identifiant d'une carte. Pour une scène
+de carte, le titre et le texte sont toujours repris intégralement du jeu, dans
+la langue choisie. `text` et `detail` restent disponibles pour les scènes sans carte.
+
+`content/videos/framing.yaml` fournit les scènes communes d'ouverture (8 secondes)
+et de conclusion (12 secondes), en français et en anglais. L'ouverture explique
+le rapprochement des perspectives des chauffeurs Uber et des mathématiciens face
+à l'IA. Ces scènes sont ajoutées automatiquement à chaque storyboard.
+
+La variable d'environnement `HOST_URL` fixe la destination de l'appel final et
+des liens de l'aperçu. Par défaut : `https://20261009.personaldata.io/`.
+L'adresse est visible dans le MP4 ; les liens sont cliquables dans l'aperçu HTML.
+Elle remplace le champ `url` des anciens storyboards lors du rendu.
+
+```bash
+HOST_URL=https://20261009.personaldata.io/ python video.py --story content/videos/07-droits.yaml --draft
+```
+
+Les cartes marquées `a_verifier` bloquent un export public tant que la scène
+correspondante n'a pas `verified: true`, après vérification éditoriale réelle.
+`--draft` permet la relecture avec un marquage visible et un nom de fichier distinct.
+Les cartes des huit familles ont été vérifiées. Pour un export sans marquage :
+
+```bash
+python video.py
+```
+
+Pour une autre famille, créer un storyboard avec son numéro `family`, un `slug`
+unique et ses scènes, puis lancer :
+
+```bash
+python video.py --story content/videos/02-boite-noire.yaml --draft
+```
+
+Les huit storyboards sont fournis en français et en anglais.
+Pour exporter la famille 7 :
+
+```bash
+python video.py --story content/videos/07-droits.yaml --draft
+python video.py --story content/videos/07-droits.yaml --language en --draft
+```
+
+Les familles 2 à 6 et 8 présentent leurs huit cartes dans l'ordre
+Terrain, Recherche, Écho, Questions, Motif, Contrainte et Levier. Les séquences
+éditoriales existantes de Flair et Droits sont conservées.
