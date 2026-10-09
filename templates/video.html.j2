@@ -95,7 +95,7 @@ window.renderFrame = function(seconds) {
     scene.setAttribute('aria-hidden', String(!active));
     if (!active) continue;
     progress = start / duration;
-    const entry = Math.min(1, (time - start) / 0.65);
+    const entry = start === 0 ? 1 : Math.min(1, (time - start) / 0.65);
     const eased = 1 - Math.pow(1 - entry, 3);
     const exit = Math.min(1, (end - time) / 0.25);
     scene.style.opacity = String(Math.min(eased, exit));

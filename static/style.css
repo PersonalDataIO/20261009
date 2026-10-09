@@ -136,6 +136,7 @@ button{font:inherit;color:inherit}
 .sheet.grid-3x3 .card{transform:scale(1.111111,1.125);transform-origin:top left}
 .sheet.grid-2x2 .card{transform:scale(1.666667,1.6875);transform-origin:top left}
 .sheet.grid-2x1 .card{transform:scale(2.357143,2.386364);transform-origin:top left}
+.sheet.grid-2x1 .rotate-back .card{transform:translate(148.5mm,210mm) rotate(180deg) scale(2.357143,2.386364)}
 .plabel{position:absolute;left:0;right:0;bottom:6mm;text-align:center;font-size:7.5pt}
 .doc{padding:13mm 15mm;font-size:8.7pt;line-height:1.34}
 .doc h1{font-family:Archivo,"Arial Black",sans-serif;font-stretch:125%;font-weight:900;font-size:24pt;line-height:1;margin:0 0 3mm}

@@ -140,7 +140,7 @@
   <div class="cut-guides" aria-hidden="true"><i class="vertical v1"></i></div>
 </div></section>
 <section class="page print-2x1"><div class="sheet grid-2x1">
-  {% for c in cells %}{% if c %}<div class="cell">{{ card.verso(c) }}</div>{% else %}<div class="cell empty"></div>{% endif %}{% endfor %}
+  {% for c in cells %}{% if c %}<div class="cell rotate-back">{{ card.verso(c) }}</div>{% else %}<div class="cell empty"></div>{% endif %}{% endfor %}
   <div class="cut-guides" aria-hidden="true"><i class="vertical v1"></i></div>
 </div></section>
 {% endfor %}
