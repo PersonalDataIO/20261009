@@ -1,0 +1,90 @@
+ordre_dans_famille:
+- T
+- R
+- Qc
+- Qm
+- C
+- E
+- M
+- L
+types:
+- code: T
+  nom: Terrain
+  lettre: T
+  niveau: 1
+  tenue_par: chauffeurs
+  description: Une situation vécue par un chauffeur, à la première personne.
+  serrure: []
+- code: R
+  nom: Recherche
+  lettre: R
+  niveau: 1
+  tenue_par: mathematiciens
+  description: Une situation vécue par un mathématicien, à la première personne.
+  serrure: []
+- code: Qc
+  nom: Question
+  code_affiche: cQm
+  lettre: Q
+  indice: c
+  niveau: 1
+  tenue_par: chauffeurs
+  description: 'cQm : les chauffeurs posent une question aux mathématiciens. Se révèle avec l’Écho (E). Tenue par les chauffeurs : on ne peut faire avancer la famille qu’en demandant à l’autre groupe.'
+  serrure:
+  - E
+- code: Qm
+  nom: Question
+  code_affiche: mQc
+  lettre: Q
+  indice: m
+  niveau: 1
+  tenue_par: mathematiciens
+  description: 'mQc : les mathématiciens posent une question aux chauffeurs. Se révèle avec l’Écho (E). Tenue par les mathématiciens.'
+  serrure:
+  - E
+- code: C
+  nom: Contrainte
+  lettre: C
+  niveau: 1
+  tenue_par: mixte
+  description: 'Un fait, une règle ou un argument adverse qui bloque le Levier. Se révèle avec le Motif (M) ; la table la trie : malentendu, désaccord ou conflit.'
+  serrure:
+  - M
+- code: E
+  nom: Écho
+  lettre: E
+  niveau: 2
+  tenue_par: mixte
+  description: Le moment où les deux vécus riment.
+  serrure:
+  - T
+  - R
+- code: M
+  nom: Motif
+  lettre: M
+  niveau: 2
+  tenue_par: mixte
+  description: Le motif commun, nommé une fois les deux questions posées.
+  serrure:
+  - Qc
+  - Qm
+- code: L
+  nom: Levier
+  lettre: L
+  niveau: 3
+  tenue_par: mixte
+  description: Une action commune, révélée avec la Contrainte (C), puis jouée après son tri.
+  serrure:
+  - C
+- code: P
+  nom: Pont
+  lettre: P
+  niveau: 2
+  tenue_par: mixte
+  description: Relie deux familles. Une moitié écrite par un chauffeur, l’autre par un mathématicien.
+- code: J
+  nom: Enjeu
+  lettre: J
+  niveau: 1
+  tenue_par: null
+  description: Ce dont chaque groupe a besoin de l’alliance. Rempli en secret au début, retourné à la fin.

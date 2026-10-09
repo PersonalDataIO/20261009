@@ -1,0 +1,6 @@
+{
+  "files.associations": {"*.html.j2": "jinja-html"},
+  "files.exclude": {"**/__pycache__": true},
+  "[markdown]": {"editor.wordWrap": "on"},
+  "cSpell.language": "fr"
+}

@@ -1,0 +1,162 @@
+{#- ===================================================================
+    Gabarit d'impression : légende, planches recto/verso, fiche animateur,
+    registre des conflits. Pages A4 (210 × 297 mm), 9 cartes par planche.
+=================================================================== -#}
+{% import "card.html.j2" as card %}
+
+{# ---------- Légende ---------- #}
+<section class="page print-intro"><div class="doc">
+  <h1>{{ cfg.titre|t }}</h1>
+  <p>{{ deck.cards|length }} cartes. Chaque famille thématique compte {{ deck.ordre|length }} cartes qui s’activent les unes les autres, des vécus de chaque groupe jusqu’à un Levier d’action commune. Chaque carte porte une lettre (son type) et un numéro (sa famille) : 4M est le Motif de la famille 4.</p>
+  <h2>Déroulé</h2>
+  <ol>
+  {% for ph in cfg.phases %}
+    <li><b>{{ ph.nom }}.</b> {{ ph.texte.replace("{leviers}", cfg.leviers_pour_gagner|string)|t }}</li>
+  {% endfor %}
+  </ol>
+  <h2>Les types de cartes</h2>
+  <table class="famtab">
+  {% for code in deck.ordre + ["P", "J"] %}{% set ty = types[code] %}
+    <tr><td class="lt"><b>{{ ty.lettre }}</b></td>
+      <td class="L">{% if ty.get("code_affiche") %}<b>{{ ty.code_affiche }}</b> · {% endif %}{{ ty.nom }}<br><span style="font-weight:400">carte {{ levels[ty.niveau] }}</span></td>
+      <td>{{ ty.description|t }}<br><i>{% if ty.tenue_par %}Tenue par : {{ holders[ty.tenue_par]|lower }}.{% else %}Une par groupe.{% endif %}
+        {% if ty.get("serrure") %} Se révèle avec {{ ty.serrure|join(" + ") }}.{% elif code == "P" %} Se révèle avec les deux Motifs reliés.{% endif %}</i></td></tr>
+  {% endfor %}
+  </table>
+  <h2>Les familles</h2>
+  <ul class="chainlist">
+  {% for s in deck.sections if s.numero is not none %}
+    <li><b class="n">{{ s.key }}</b><span><b>{{ s.theme|t }}.</b> {{ s.intention|t }}</span></li>
+  {% endfor %}
+  </ul>
+  <h2>Impression</h2>
+  <p>{{ cfg.impression.consigne|t }}</p>
+</div></section>
+
+{# ---------- Schéma des transitions ---------- #}
+<section class="page print-intro"><div class="doc transition-map">
+  <h1>Transitions de jeu</h1>
+  <p class="transition-intro">Dans chaque famille, les cartes se révèlent au fil des échanges. Les Ponts relient les familles et conditionnent la victoire.</p>
+  <div class="transition-board">
+    <div class="transition-lane" aria-label="Parcours des cartes">
+      <div class="transition-row two-cards"><span class="transition-card"><b>T</b><small>Terrain</small></span><span class="transition-card"><b>R</b><small>Recherche</small></span></div>
+      <span class="transition-down">↓</span>
+      <div class="transition-row"><span class="transition-card key-card"><b>E</b><small>Écho</small></span></div>
+      <span class="transition-down">↓</span>
+      <div class="transition-row two-cards"><span class="transition-card"><b>mQc</b><small>Matheux → chauffeurs</small></span><span class="transition-card"><b>cQm</b><small>Chauffeurs → matheux</small></span></div>
+      <span class="transition-down">↓</span>
+      <div class="transition-row"><span class="transition-card key-card"><b>M</b><small>Motif</small></span></div>
+      <span class="transition-down">↓</span>
+      <div class="transition-row"><span class="transition-card key-card"><b>C</b><small>Contrainte</small></span></div>
+      <span class="transition-down">↓</span>
+      <div class="transition-row"><span class="transition-card action-card"><b>L</b><small>Levier</small></span></div>
+    </div>
+    <div class="transition-notes">
+      <section class="transition-note"><h2>Reconnaître</h2><p>Les deux vécus d’une famille sont posés sur la table : ils révèlent l’Écho.</p></section>
+      <section class="transition-note"><h2>Éprouver et nommer</h2><p>Les Questions se révèlent avec l’Écho. Le Motif s’ouvre quand les deux Questions sont sur la table; la table le nomme.</p></section>
+      <section class="transition-note"><h2>Agir ensemble</h2><p>Le Motif révèle la Contrainte; la Contrainte révèle le Levier. Trier la Contrainte avant de jouer le Levier.</p>
+        <div class="constraint-outcomes">
+          {% for tri in cfg.tri_contraintes %}<div><b>{{ tri.nom }}</b><span>{{ tri.effet|t }}</span></div>{% endfor %}
+        </div>
+        <p>Un Levier ne compte que si un Pont touche sa famille.</p>
+        <div class="bridge-rule"><b>Pont (P)</b><span>Se révèle quand les deux Motifs reliés sont sur la table.</span><b>Faux pont</b><span>Une Contrainte posée sur un Pont et triée en conflit le marque comme faux ; il reste sur la table.</span></div>
+      </section>
+      <section class="transition-note"><h2>Bilan</h2><p>Au moins {{ cfg.leviers_pour_gagner }} Leviers ouverts : victoire commune. Vérifier qu’ils servent les deux groupes, retourner les deux Enjeux et photographier le réseau de Ponts.</p></section>
+    </div>
+  </div>
+</div></section>
+
+{# ---------- Review par famille ---------- #}
+{% macro review_card(c) -%}
+<article class="review-card review-{{ c.type }}">
+  <div class="review-card-head"><b>{{ card.display_id(c.id) }}</b><strong>{{ c.titre|t }}</strong></div>
+  <p>{{ c.texte|t }}</p>
+</article>
+{%- endmacro %}
+{% for s in deck.sections if s.numero is not none %}
+{% set family = deck.section_cards(s.key) %}
+{% set terrain = family|selectattr("type", "equalto", "T")|first %}
+{% set recherche = family|selectattr("type", "equalto", "R")|first %}
+{% set qc = family|selectattr("type", "equalto", "Qc")|first %}
+{% set qm = family|selectattr("type", "equalto", "Qm")|first %}
+{% set contrainte = family|selectattr("type", "equalto", "C")|first %}
+{% set echo = family|selectattr("type", "equalto", "E")|first %}
+{% set motif = family|selectattr("type", "equalto", "M")|first %}
+{% set levier = family|selectattr("type", "equalto", "L")|first %}
+<section class="page review-page"><div class="review-doc">
+  <header class="review-header"><span class="review-family-number">{{ s.key }}</span><div><p>REVIEW · FAMILLE {{ s.key }}</p><h1>{{ s.theme|t }}</h1><div class="review-intention">{{ s.intention|t }}</div></div></header>
+  <section class="review-stage">
+    <div class="review-stage-title"><b>01</b><h2>Faire apparaître l’Écho</h2><span>Deux vécus sur la table</span></div>
+    <div class="review-flow">{{ review_card(terrain) }}<span class="review-operator">+</span>{{ review_card(recherche) }}<span class="review-operator">→</span>{{ review_card(echo) }}</div>
+  </section>
+  <section class="review-stage">
+    <div class="review-stage-title"><b>02</b><h2>Nommer le Motif</h2><span>Chaque groupe interroge l’autre</span></div>
+    <div class="review-flow">{{ review_card(qc) }}<span class="review-operator">+</span>{{ review_card(qm) }}<span class="review-operator">→</span>{{ review_card(motif) }}</div>
+    <p class="review-prerequisite">Les Questions se révèlent avec l’Écho. Le Motif s’ouvre quand les deux Questions sont sur la table.</p>
+  </section>
+  <section class="review-stage review-stage-final">
+    <div class="review-stage-title"><b>03</b><h2>Passer à l’action</h2><span>La Contrainte est triée collectivement</span></div>
+    <div class="review-flow">{{ review_card(motif) }}<span class="review-operator">→</span>{{ review_card(contrainte) }}<span class="review-operator">→</span>{{ review_card(levier) }}</div>
+    <p class="review-prerequisite">La Contrainte révèle le Levier; trier la Contrainte avant de jouer le Levier.</p>
+    <div class="review-triage">{% for tri in cfg.tri_contraintes %}<div><b>{{ tri.nom }}</b><span>{{ tri.effet|t }}</span></div>{% endfor %}</div>
+  </section>
+  <section class="review-moderator-notes">
+    <h2>Notes d’animation</h2>
+    <div>{% for c in family %}<p><b>{{ card.display_id(c.id) }}</b><span>{{ c.note|t }}</span></p>{% endfor %}</div>
+  </section>
+  <footer class="review-footer"><b>Condition de victoire</b><span>Ce Levier compte si un Pont touche la famille {{ s.key }}. Ouvrir au moins {{ cfg.leviers_pour_gagner }} Leviers, puis retourner les deux Enjeux.</span></footer>
+</div></section>
+{% endfor %}
+
+{# ---------- Planches ---------- #}
+{% for sheet in deck.cards|chunks(9) %}
+{% set cells = sheet + [none] * (9 - sheet|length) %}
+<section class="page print-3x3"><div class="sheet grid-3x3">
+  {% for c in cells %}{% if c %}<div class="cell">{{ card.recto(c) }}</div>{% else %}<div class="cell empty"></div>{% endif %}{% endfor %}
+  <div class="cut-guides" aria-hidden="true"><i class="vertical v1"></i><i class="vertical v2"></i><i class="horizontal h1"></i><i class="horizontal h2"></i></div>
+</div></section>
+<section class="page print-3x3"><div class="sheet grid-3x3">
+  {% for c in cells|mirror_rows %}{% if c %}<div class="cell">{{ card.verso(c) }}</div>{% else %}<div class="cell empty"></div>{% endif %}{% endfor %}
+  <div class="cut-guides" aria-hidden="true"><i class="vertical v1"></i><i class="vertical v2"></i><i class="horizontal h1"></i><i class="horizontal h2"></i></div>
+</div></section>
+{% endfor %}
+
+{% for sheet in deck.cards|chunks(4) %}
+{% set cells = sheet + [none] * (4 - sheet|length) %}
+<section class="page print-2x2"><div class="sheet grid-2x2">
+  {% for c in cells %}{% if c %}<div class="cell">{{ card.recto(c) }}</div>{% else %}<div class="cell empty"></div>{% endif %}{% endfor %}
+  <div class="cut-guides" aria-hidden="true"><i class="vertical v1"></i><i class="horizontal h1"></i></div>
+</div></section>
+<section class="page print-2x2"><div class="sheet grid-2x2">
+  {% for c in cells|mirror_rows(2) %}{% if c %}<div class="cell">{{ card.verso(c) }}</div>{% else %}<div class="cell empty"></div>{% endif %}{% endfor %}
+  <div class="cut-guides" aria-hidden="true"><i class="vertical v1"></i><i class="horizontal h1"></i></div>
+</div></section>
+{% endfor %}
+
+{# ---------- Fiche animateur ---------- #}
+{% for group in deck.sections|chunks(2) %}
+<section class="page print-shared"><div class="doc fiche">
+  {% if loop.first %}<h1 style="font-size:20pt">Fiche animateur</h1><p>À garder pour soi. Chaque ligne donne la carte, qui la tient, ce qu’il faut pour l’ouvrir et une piste de relance. « À vérifier » signale un fait à faire relire avant l’atelier.</p>{% endif %}
+  {% for s in group %}
+  <h2><b class="n">{{ s.key }}</b>{{ s.theme|t }}</h2><p class="intent">{{ s.intention|t }}</p>
+  <table class="ftab"><thead><tr><th>Carte</th><th>Titre</th><th>Tenue par</th><th>Serrure</th><th>Relance</th></tr></thead><tbody>
+  {% for c in deck.section_cards(s.key) %}
+    <tr><td>{{ card.display_id(c.id) }}{% if c.a_verifier %}<br><span class="verif">à vérifier</span>{% endif %}</td><td>{{ c.titre|t }}</td><td>{{ holders[c.tenue_par] }}</td>
+      <td>{% if c.serrure %}{% for k in c.serrure %}{{ card.key(k) }}{{ " + " if not loop.last }}{% endfor %}{% else %}libre{% endif %}</td><td>{{ c.note|t }}</td></tr>
+  {% endfor %}
+  </tbody></table>
+  {% endfor %}
+</div></section>
+{% endfor %}
+
+{# ---------- Registre des conflits ---------- #}
+<section class="page print-shared"><div class="doc">
+  <h1 style="font-size:20pt">Registre des conflits</h1>
+  <p>Chaque Contrainte posée est triée. Les conflits restent ici, nommés, même quand la partie continue. Cocher aussi les faux ponts.</p>
+  <p>{% for tri in cfg.tri_contraintes %}<b>{{ tri.code }}</b> {{ tri.nom }} : {{ tri.effet|t }}.{{ " " if not loop.last }}{% endfor %}</p>
+  <table class="reg"><thead><tr><th>Carte</th><th>Tri</th><th>Le conflit, en une phrase</th><th>Qui le porte</th></tr></thead><tbody>
+  {% for _ in range(cfg.impression.lignes_registre) %}
+    <tr><td style="width:16mm"></td><td class="tri">{% for tri in cfg.tri_contraintes %}☐ {{ tri.code }} {% endfor %}</td><td></td><td style="width:34mm"></td></tr>
+  {% endfor %}
+  </tbody></table>
+</div></section>

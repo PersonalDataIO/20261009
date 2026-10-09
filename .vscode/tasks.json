@@ -1,0 +1,9 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {"label": "Jeu : construire", "type": "shell", "command": "python build.py",
+     "group": {"kind": "build", "isDefault": true}, "problemMatcher": []},
+    {"label": "Jeu : contrôler", "type": "shell", "command": "python build.py --check", "problemMatcher": []},
+    {"label": "Jeu : contrôle strict", "type": "shell", "command": "python build.py --check --strict", "problemMatcher": []}
+  ]
+}

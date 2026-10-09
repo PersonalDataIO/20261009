@@ -1,0 +1,71 @@
+{#- ===================================================================
+    Gabarit des cartes : recto et verso.
+    Format 63 × 88 mm. Le style vit dans static/style.css (section « Carte »).
+    Chaque macro reçoit un objet Card (deckgen/loader.py).
+=================================================================== -#}
+
+{% macro key(id) -%}
+<span class="key">{{ display_id(id) }}</span>
+{%- endmacro %}
+
+{% macro display_id(id) -%}
+{% if id.endswith("Qc") %}{{ id[:-2] }}cQm{% elif id.endswith("Qm") %}{{ id[:-2] }}mQc{% else %}{{ id }}{% endif %}
+{%- endmacro %}
+
+{% macro letter(code) -%}
+{% set ty = types[code] %}
+{% if ty.get("code_affiche") %}<span class="chip letter direction">{{ ty.code_affiche }}</span>
+{%- elif ty.get("indice") %}<span class="chip letter sub">{{ ty.lettre }}<small>{{ ty.indice }}</small></span>
+{%- else %}<span class="chip letter">{{ ty.lettre }}</span>{% endif %}
+{%- endmacro %}
+
+{% macro body(c) -%}
+{% if c.type == "P" and not c.vierge %}
+<span class="half"><b>Chauffeur :</b> « {{ c.chauffeur }} »</span><span class="half"><b>Mathématicien :</b> « {{ c.mathematicien }} »</span>
+{%- elif c.type == "P" %}
+Relie la famille ____ et la famille ____ .<span class="half"><b>Chauffeur :</b></span><span class="blank"></span><span class="blank"></span><span class="half"><b>Mathématicien :</b></span><span class="blank"></span><span class="blank"></span>
+{%- elif c.type == "J" %}
+{{ c.texte }}{% for _ in range(c.lignes) %}<span class="blank"></span>{% endfor %}
+{%- else %}
+{{ c.texte }}
+{%- endif %}
+{%- endmacro %}
+
+{% macro recto(c) -%}
+{% set ty = types[c.type] %}
+<article class="card fam-{{ c.type }}" aria-label="Carte {{ display_id(c.id) }}, {{ ty.nom }}">
+  <div class="frame">
+    <div class="head">
+      <span class="chip num{% if c.num|length > 1 %} pair{% endif %}">{{ c.num }}</span>
+      <span class="chip name{% if ty.get("indice") %} wrap{% endif %}">{{ ty.nom }}</span>
+      {{ letter(c.type) }}
+    </div>
+    <div class="content{% if c.titre.startswith("«") %} quote-title{% endif %}">
+      {% if c.titre.startswith("«") %}<p>{{ body(c)|t }}</p><h3>{{ c.titre|t }}</h3>
+      {% else %}<h3>{{ c.titre|t }}</h3><p>{{ body(c)|t }}</p>{% endif %}
+    </div>
+  </div>
+</article>
+{%- endmacro %}
+
+{% macro lock_sentence(ids) -%}
+{% for k in ids %}{% if not loop.first %}{{ " et " if loop.last else ", " }}{% endif %}{{ key(k) }}{% endfor %}
+{%- endmacro %}
+
+{% macro verso(c) -%}
+{% set ty = types[c.type] %}
+<article class="card verso fam-{{ c.type }}" aria-label="Verso de la carte {{ display_id(c.id) }}">
+  <div class="frame">
+    <div class="vbody">
+      <div class="bignum code">{{ display_id(c.id) }}</div>
+      <div class="vfam">{{ ty.nom }}, carte {{ levels[ty.niveau] }}</div>
+      {% if c.serrure %}
+      <div class="lock"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 11V7.5a5 5 0 0 1 10 0V11" fill="none" stroke="#000" stroke-width="2.6"/><rect x="3.5" y="10.5" width="17" height="12" rx="2" fill="#000"/><rect x="11" y="14" width="2" height="5" fill="#fff"/></svg><span>Se révèle quand {{ lock_sentence(c.serrure) }} {{ "est" if c.serrure|length == 1 else "sont" }} sur la table.</span></div>
+      {% else %}
+      <div class="free">{{ (c.consigne or "Carte libre, à lire dès le départ.")|t }}</div>
+      {% endif %}
+    </div>
+    <div class="foot">Pour : {{ holders[c.tenue_par] }}</div>
+  </div>
+</article>
+{%- endmacro %}

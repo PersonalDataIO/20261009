@@ -1,0 +1,56 @@
+# Paramètres généraux du jeu. Tout ce qui n'est pas une carte vit ici.
+titre: "Chauffeurs et mathématiciens : huit familles"
+favicon: "🃏"
+chapeau: >-
+  Huit familles, chacune une fermeture éclair : un vécu de chauffeur et un vécu de mathématicien,
+  des questions posées à l’autre groupe, un motif nommé ensemble, une contrainte à trier,
+  puis un levier d’action. Des ponts relient les familles ; deux enjeux secrets jugent l’alliance à la fin.
+
+niveaux:
+  1: "libre"
+  2: "verrouillée"
+  3: "d’action"
+
+detenteurs:
+  chauffeurs: "Chauffeurs"
+  mathematiciens: "Mathématiciens"
+  mixte: "Binôme mixte"
+
+# Condition de victoire coopérative
+leviers_pour_gagner: 4
+
+# Tri des contraintes (repris dans la légende et le registre des conflits)
+tri_contraintes:
+  - code: M
+    nom: "Malentendu"
+    effet: "une traduction suffit ; peut ouvrir un Pont"
+  - code: D
+    nom: "Désaccord"
+    effet: "il faut une preuve pour lever le blocage"
+  - code: C
+    nom: "Conflit"
+    effet: "on le nomme au registre ; nommer compte autant que résoudre"
+
+phases:
+  - nom: "Reconnaître"
+    texte: "Lecture des Terrains et des Recherches. Quand les deux vécus d’une famille sont sur la table, l’Écho se retourne : « ça rime »."
+  - nom: "Éprouver"
+    texte: "Quand l’Écho est sur la table, chaque groupe pose sa Question à l’autre. Les deux Questions ouvrent le Motif : la table le nomme."
+  - nom: "Agir ensemble"
+    texte: "Le Motif ouvre la Contrainte ; la Contrainte révèle le Levier. La table trie la Contrainte : malentendu, désaccord ou conflit ; le Levier se joue après ce tri. Un Levier ne compte que si un Pont touche sa famille. Une Contrainte posée sur un Pont et triée en conflit en fait un faux pont : il reste sur la table, marqué."
+  - nom: "Bilan"
+    texte: "La table gagne ensemble avec au moins {leviers} Leviers ouverts. On retourne alors les deux Enjeux : les Leviers servent-ils les deux groupes ? Photographier le réseau de Ponts avant de ranger."
+
+sections:
+  ponts:
+    lettre: "P"
+    theme: "Ponts"
+    intention: "Quatre ponts imprimés entre familles, quatre à inventer. Chacun se révèle quand les deux Motifs qu’il relie sont sur la table."
+  enjeux:
+    lettre: "J"
+    theme: "Enjeux"
+    intention: "Un enjeu secret par groupe. À la fin, les Leviers ouverts servent-ils les deux ?"
+
+impression:
+  consigne: "A4 recto verso, retournement sur le bord long, échelle 100 %. Papier de 250 g/m² ou plus. Imprimer d’abord la planche 1 pour vérifier l’alignement."
+  lignes_registre: 20

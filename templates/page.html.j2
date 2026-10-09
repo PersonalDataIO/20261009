@@ -1,0 +1,58 @@
+{#- ===================================================================
+    Page complète : vue Partie (interactive, static/play.js)
+    + vue Impression (templates/print.html.j2). Un seul fichier autonome.
+=================================================================== -#}
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{ cfg.titre }}</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>{{ cfg.favicon }}</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+{{ css }}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <h1>{{ cfg.titre|t }}</h1>
+    <p class="lede">{{ cfg.chapeau|t }}</p>
+    <ul class="nav">
+    {% for s in deck.sections %}
+      <li><a href="#ch-{{ s.key }}"><b>{{ s.key }}</b><span>{{ s.theme|t }}</span></a></li>
+    {% endfor %}
+    </ul>
+    <div class="bar">
+      <div class="tabs" role="group" aria-label="Vue">
+        <button type="button" id="tab-play" aria-pressed="true">Partie</button>
+        <button type="button" id="tab-print-3x3" aria-pressed="false">Impression 3x3</button>
+        <button type="button" id="tab-print-2x2" aria-pressed="false">Impression 2x2</button>
+        <button type="button" id="tab-review" aria-pressed="false">Review</button>
+      </div>
+      <span id="play-ctrls" style="display:flex;flex-wrap:wrap;gap:8px">
+        <button type="button" class="ctrl" id="btn-all" aria-pressed="false">Tout révéler</button>
+        <button type="button" class="ctrl" id="btn-notes" aria-pressed="false">Notes animateur</button>
+        <button type="button" class="ctrl" id="btn-reset">Recommencer</button>
+      </span>
+      <span id="print-ctrls" style="display:none;flex-wrap:wrap;gap:8px;align-items:center">
+        <button type="button" class="ctrl primary" id="btn-print">Imprimer</button>
+        <span class="hint">{{ cfg.impression.consigne|t }} Si le bouton ne répond pas, utilisez Ctrl + P ou Cmd + P.</span>
+      </span>
+      <span class="progress" id="progress"></span>
+    </div>
+  </header>
+  <main id="play"></main>
+</div>
+<div id="print-root" class="offscreen"><div class="pages-wrap"><div class="pages layout-3x3" id="pages">
+{% include "print.html.j2" %}
+</div></div></div>
+<script id="deck-data" type="application/json">{{ data }}</script>
+<script>
+{{ js }}
+</script>
+</body>
+</html>
