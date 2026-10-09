@@ -44,7 +44,6 @@ function renderPlay(){
   DATA.sections.forEach(s => {
     const sectionCards = CARDS.filter(c => c.section === s.key);
     html += `<section class="chain" id="ch-${s.key}"><div class="chain-head"><span class="num">${s.key}</span><div><h2>${s.theme}</h2><p>${s.intention}</p></div></div>`;
-    if (s.video) html += `<p class="video-download"><a href="${s.video}" download>${DATA.video_download_label} · ${s.theme} (MP4)</a></p>`;
     if (/^\d+$/.test(s.key)){
       const byType = new Map(sectionCards.map(c => [c.type, c]));
       const stages = [["T", "R"], ["E"], ["Qm", "Qc"], ["M"], ["C"], ["L"]];
@@ -71,6 +70,13 @@ function renderPlay(){
   document.getElementById("progress").textContent = `${cardsProgress} · ${leversProgress}${goal}`;
 }
 
+function renderVideos(){
+  const videos = DATA.sections.filter(section => section.video);
+  document.getElementById("videos").innerHTML = videos.map(section =>
+    `<section class="video-rendering"><h2>${section.key} · ${section.theme}</h2><video controls preload="none" playsinline aria-label="${DATA.ui.video_aria} ${section.theme}"><source src="${section.video}" type="video/mp4"></video></section>`
+  ).join("");
+}
+
 document.getElementById("play").addEventListener("click", e => {
   const b = e.target.closest("button[data-act]"); if (!b) return;
   const id = b.dataset.id, act = b.dataset.act;
@@ -84,23 +90,34 @@ const tog = (btn, key) => { state[key] = !state[key]; btn.setAttribute("aria-pre
 document.getElementById("btn-all").addEventListener("click", e => tog(e.currentTarget, "all"));
 document.getElementById("btn-notes").addEventListener("click", e => tog(e.currentTarget, "notes"));
 document.getElementById("btn-reset").addEventListener("click", () => {
-  state.table.clear(); state.revealed.clear(); state.all = false;
-  document.getElementById("btn-all").setAttribute("aria-pressed", "false"); renderPlay();
+  state.table.clear(); state.revealed.clear(); state.all = false; state.notes = false;
+  document.getElementById("btn-all").setAttribute("aria-pressed", "false");
+  document.getElementById("btn-notes").setAttribute("aria-pressed", "false"); renderPlay();
 });
 
-/* Onglets Partie / Impression */
+/* Menus de rendu */
 const printRoot = document.getElementById("print-root");
 function show(which){
   const isPlay = which === "play";
-  const isPrint = !isPlay;
-  document.getElementById("tab-play").setAttribute("aria-pressed", isPlay);
+  const isVideos = which === "videos";
+  const isReview = which === "review";
+  const isPrint = which.startsWith("print-") || isReview;
+  const topMenu = isPlay ? "play" : isVideos ? "videos" : isReview ? "review" : "print";
+  document.getElementById("tab-play").setAttribute("aria-pressed", topMenu === "play");
+  document.getElementById("tab-print").setAttribute("aria-pressed", topMenu === "print");
+  document.getElementById("tab-review").setAttribute("aria-pressed", topMenu === "review");
+  document.getElementById("tab-videos").setAttribute("aria-pressed", topMenu === "videos");
   document.getElementById("tab-print-3x3").setAttribute("aria-pressed", which === "print-3x3");
   document.getElementById("tab-print-2x2").setAttribute("aria-pressed", which === "print-2x2");
   document.getElementById("tab-print-2x1").setAttribute("aria-pressed", which === "print-2x1");
-  document.getElementById("tab-review").setAttribute("aria-pressed", which === "review");
   document.getElementById("play").style.display = isPlay ? "" : "none";
-  document.getElementById("play-ctrls").style.display = isPlay ? "flex" : "none";
-  document.getElementById("print-ctrls").style.display = isPrint ? "flex" : "none";
+  if (!isVideos) document.querySelectorAll("#videos video").forEach(video => video.pause());
+  document.getElementById("videos").hidden = !isVideos;
+  document.getElementById("play-ctrls").style.display = topMenu === "play" ? "flex" : "none";
+  document.getElementById("print-ctrls").style.display = topMenu === "print" || isReview ? "flex" : "none";
+  document.getElementById("print-formats").style.display = topMenu === "print" ? "flex" : "none";
+  document.getElementById("btn-print").style.display = isPrint ? "" : "none";
+  document.getElementById("progress").style.display = isPlay ? "" : "none";
   printRoot.classList.toggle("offscreen", !isPrint);
   const pages = document.getElementById("pages");
   pages.classList.toggle("layout-3x3", which === "print-3x3");
@@ -110,13 +127,16 @@ function show(which){
   if (isPrint) fit(pages);
 }
 document.getElementById("tab-play").addEventListener("click", () => show("play"));
+document.getElementById("tab-print").addEventListener("click", () => show("print-3x3"));
 document.getElementById("tab-print-3x3").addEventListener("click", () => show("print-3x3"));
 document.getElementById("tab-print-2x2").addEventListener("click", () => show("print-2x2"));
 document.getElementById("tab-print-2x1").addEventListener("click", () => show("print-2x1"));
 document.getElementById("tab-review").addEventListener("click", () => show("review"));
+document.getElementById("tab-videos").addEventListener("click", () => show("videos"));
 document.getElementById("btn-print").addEventListener("click", () => { try { window.print(); } catch(e){} });
 
 renderPlay();
+renderVideos();
 const refit = () => { fit(document.getElementById("play")); fit(document.getElementById("pages")); };
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(refit);
 window.addEventListener("load", refit);

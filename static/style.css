@@ -32,19 +32,23 @@ button{font:inherit;color:inherit}
 .tabs{display:flex;border:2px solid var(--rule)}
 .tabs button{background:transparent;border:0;padding:8px 16px;cursor:pointer;font-weight:700}
 .tabs button[aria-pressed="true"]{background:var(--btn-bg);color:var(--btn-ink)}
+.top-menus{flex:none}
+.submenu{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.print-formats{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.submenu .ctrl[aria-pressed="true"]{background:var(--btn-bg);color:var(--btn-ink)}
 .ctrl{background:transparent;border:2px solid var(--rule);padding:6px 12px;cursor:pointer}
 .ctrl[aria-pressed="true"],.ctrl.primary{background:var(--btn-bg);color:var(--btn-ink)}
 .ctrl.primary{font-weight:700}
 .progress{margin-left:auto;font-weight:700;font-variant-numeric:tabular-nums}
 .hint{color:var(--muted);font-size:14px;max-width:70ch}
 
-/* Table de jeu */
-.video-library{border-top:2px solid var(--rule);padding:12px 0;margin-bottom:12px}
-.video-library summary{cursor:pointer;font-weight:700}
-.video-library ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;list-style:none;padding:12px 0;margin:0}
-.video-library a,.video-download a{color:var(--ink);text-underline-offset:3px}
-.video-download{margin:0 0 18px;font-size:14px}
+/* Table de jeu et rendu vidéo */
 #play{max-width:1180px;margin:0 auto;padding:0 20px 60px}
+#videos{max-width:1180px;margin:0 auto;padding:0 20px 60px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:24px}
+#videos[hidden]{display:none}
+.video-rendering{min-width:0}
+.video-rendering h2{font-family:Archivo,"Arial Black",sans-serif;font-size:20px;line-height:1.15;margin:0 0 10px}
+.video-rendering video{display:block;width:100%;max-width:420px;aspect-ratio:9/16;object-fit:contain;background:#171816}
 .chain{margin:0 0 44px;scroll-margin-top:16px}
 .chain-head{display:flex;gap:14px;align-items:flex-start;margin:0 0 16px;max-width:80ch}
 .chain-head .num{font-family:Archivo,"Arial Black",sans-serif;font-weight:900;font-size:40px;line-height:1;min-width:52px;height:52px;display:grid;place-items:center;border:3px solid var(--rule);flex:none}
@@ -67,6 +71,7 @@ button{font:inherit;color:inherit}
 @keyframes reveal{from{transform:rotateY(80deg);opacity:.2}to{transform:none;opacity:1}}
 @media (prefers-reduced-motion:reduce){.just-revealed{animation:none}}
 @media (max-width:620px){.family-row{gap:10px}.family-row .slot{width:min(63mm,calc((100vw - 60px)/2))}.family-row.single .slot{width:min(63mm,calc(100vw - 40px))}}
+@media (max-width:760px){.bar{align-items:stretch}.top-menus{width:100%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}.tabs button{padding:8px 5px}.submenu{width:100%}.progress{margin-left:0}}
 
 /* ============ Carte (voir templates/card.html.j2) ============ */
 .card{width:63mm;height:88mm;padding:1.6mm;background:#fff;color:#000;flex:none;position:relative;font-family:"Atkinson Hyperlegible",Verdana,sans-serif}

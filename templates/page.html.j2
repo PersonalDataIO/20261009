@@ -28,24 +28,24 @@
       <li><a href="#ch-{{ s.key }}"><b>{{ s.key }}</b><span>{{ s.theme|t }}</span></a></li>
     {% endfor %}
     </ul>
-    <details class="video-library">
-      <summary>{{ video_heading }}</summary>
-      <ul>{% for s in deck.sections if s.numero is not none %}<li><a href="{{ family_videos[s.key] }}" download>{{ video_download_label }} · {{ s.theme|t }} (MP4)</a></li>{% endfor %}</ul>
-    </details>
     <div class="bar">
-      <div class="tabs" role="group" aria-label="{{ ui.tab_group }}">
+      <div class="tabs top-menus" role="group" aria-label="{{ ui.tab_group }}">
         <button type="button" id="tab-play" aria-pressed="true">{{ ui.tab_play }}</button>
-        <button type="button" id="tab-print-3x3" aria-pressed="false">{{ ui.tab_print_3x3 }}</button>
-        <button type="button" id="tab-print-2x2" aria-pressed="false">{{ ui.tab_print_2x2 }}</button>
-        <button type="button" id="tab-print-2x1" aria-pressed="false">{{ ui.tab_print_2x1 }}</button>
+        <button type="button" id="tab-print" aria-pressed="false">{{ ui.tab_print }}</button>
         <button type="button" id="tab-review" aria-pressed="false">{{ ui.tab_review }}</button>
+        <button type="button" id="tab-videos" aria-pressed="false">{{ ui.tab_videos }}</button>
       </div>
-      <span id="play-ctrls" style="display:flex;flex-wrap:wrap;gap:8px">
+      <span id="play-ctrls" class="submenu" role="group" aria-label="{{ ui.tab_play_group }}">
         <button type="button" class="ctrl" id="btn-all" aria-pressed="false">{{ ui.show_all }}</button>
         <button type="button" class="ctrl" id="btn-notes" aria-pressed="false">{{ ui.show_notes }}</button>
         <button type="button" class="ctrl" id="btn-reset">{{ ui.reset }}</button>
       </span>
-      <span id="print-ctrls" style="display:none;flex-wrap:wrap;gap:8px;align-items:center">
+      <span id="print-ctrls" class="submenu" role="group" aria-label="{{ ui.tab_print_group }}" style="display:none">
+        <span id="print-formats" class="submenu">
+          <button type="button" class="ctrl" id="tab-print-3x3" aria-pressed="true">{{ ui.print_3x3 }}</button>
+          <button type="button" class="ctrl" id="tab-print-2x2" aria-pressed="false">{{ ui.print_2x2 }}</button>
+          <button type="button" class="ctrl" id="tab-print-2x1" aria-pressed="false">{{ ui.print_2x1 }}</button>
+        </span>
         <button type="button" class="ctrl primary" id="btn-print">{{ ui.print }}</button>
         <span class="hint">{{ cfg.impression.consigne|t }} {{ ui.print_help_suffix }}</span>
       </span>
@@ -53,6 +53,7 @@
     </div>
   </header>
   <main id="play"></main>
+  <main id="videos" hidden></main>
 </div>
 <div id="print-root" class="offscreen"><div class="pages-wrap"><div class="pages layout-3x3" id="pages">
 {% include "print.html.j2" %}

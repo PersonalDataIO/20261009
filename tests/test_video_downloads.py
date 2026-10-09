@@ -10,8 +10,8 @@ from deckgen.video import load_video_deck, prepare_story, render_preview
 ROOT = Path(__file__).resolve().parents[1]
 
 
-class VideoDownloadTests(unittest.TestCase):
-    def test_all_family_downloads_match_language(self):
+class VideoRenderingTests(unittest.TestCase):
+    def test_all_family_videos_render_inline_with_language_paths(self):
         for language in ["fr", "en"]:
             html = build_html(ROOT, load(ROOT, language), language)
             data = json.loads(re.search(r'<script id="deck-data" type="application/json">(.*?)</script>', html, re.S).group(1))
@@ -20,7 +20,10 @@ class VideoDownloadTests(unittest.TestCase):
             for section in families:
                 self.assertTrue(section["video"].startswith("videos/" if language == "fr" else "../videos/"))
                 self.assertTrue(section["video"].endswith("-en.mp4" if language == "en" else ".mp4"))
-                self.assertIn(f'href="{section["video"]}" download', html)
+                self.assertIn('<video controls preload="none" playsinline', html)
+                self.assertIn('<source src="${section.video}" type="video/mp4">', html)
+            self.assertIn('<main id="videos" hidden></main>', html)
+            self.assertIn('id="tab-videos"', html)
 
     def test_all_storyboards_export_without_draft(self):
         paths = sorted((ROOT / "content/videos").glob("[0-9][0-9]-*.yaml"))

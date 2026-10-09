@@ -49,8 +49,6 @@ def make_env(root: Path, deck: Deck, language: str) -> Environment:
 
 def build_html(root: Path, deck: Deck, language: str = "fr") -> str:
     env = make_env(root, deck, language)
-    labels = {"fr": ("Télécharger la vidéo", "Vidéos des familles"),
-              "en": ("Download video", "Family videos")}[language]
     video_prefix = "videos/" if language == "fr" else "../videos/"
     family_videos = {str(section.numero): video_prefix + Path(next(
         (root / "content/familles").glob(f"{section.numero:02}-*"))).name
@@ -67,7 +65,6 @@ def build_html(root: Path, deck: Deck, language: str = "fr") -> str:
         "leviers": {"total": sum(1 for c in deck.cards if c.type == "L"),
                 "pour_gagner": deck.config["leviers_pour_gagner"]},
         "ui": deck.config["ui"],
-        "video_download_label": labels[0],
     }
     page = env.get_template("page.html.j2")
     return page.render(
@@ -76,5 +73,5 @@ def build_html(root: Path, deck: Deck, language: str = "fr") -> str:
         data=json.dumps(play_data, ensure_ascii=False).replace("</", "<\\/"),
         language=language,
         language_switch_href="en/" if language == "fr" else "../",
-        family_videos=family_videos, video_download_label=labels[0], video_heading=labels[1],
+        family_videos=family_videos,
     )

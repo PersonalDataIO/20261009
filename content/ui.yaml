@@ -5,12 +5,16 @@ fr:
   language_name: Français
   tab_group: Vue
   tab_play: Partie
-  tab_print_3x3: Impression 3x3
-  tab_print_2x2: Impression 2x2
-  tab_print_2x1: Impression 2x1
+  tab_print: Impression
   tab_review: Review
-  show_all: Tout révéler
-  show_notes: Notes animateur
+  tab_videos: Vidéos
+  tab_play_group: Actions de partie
+  tab_print_group: Formats d’impression
+  show_all: Révéler
+  show_notes: Animation
+  print_3x3: 3x3
+  print_2x2: 2x2
+  print_2x1: 2x1
   reset: Recommencer
   print: Imprimer
   print_help_suffix: Si le bouton ne répond pas, utilisez Ctrl + P ou Cmd + P.
@@ -107,12 +111,16 @@ en:
   language_name: English
   tab_group: View
   tab_play: Play
-  tab_print_3x3: Print 3x3
-  tab_print_2x2: Print 2x2
-  tab_print_2x1: Print 2x1
+  tab_print: Print
   tab_review: Review
-  show_all: Reveal all
-  show_notes: Facilitator notes
+  tab_videos: Videos
+  tab_play_group: Play actions
+  tab_print_group: Print formats
+  show_all: Reveal
+  show_notes: Facilitator
+  print_3x3: 3x3
+  print_2x2: 2x2
+  print_2x1: 2x1
   reset: Reset
   print: Print
   print_help_suffix: If the button does not respond, use Ctrl + P or Cmd + P.
