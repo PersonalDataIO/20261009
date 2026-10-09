@@ -1,9 +1,42 @@
 {
-  "version": "2.0.0",
-  "tasks": [
-    {"label": "Jeu : construire", "type": "shell", "command": "python build.py",
-     "group": {"kind": "build", "isDefault": true}, "problemMatcher": []},
-    {"label": "Jeu : contrôler", "type": "shell", "command": "python build.py --check", "problemMatcher": []},
-    {"label": "Jeu : contrôle strict", "type": "shell", "command": "python build.py --check --strict", "problemMatcher": []}
-  ]
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Jeu : construire",
+			"type": "shell",
+			"command": "python build.py",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Jeu : contrôler",
+			"type": "shell",
+			"command": "python build.py --check",
+			"problemMatcher": []
+		},
+		{
+			"label": "Jeu : contrôle strict",
+			"type": "shell",
+			"command": "python build.py --check --strict",
+			"problemMatcher": []
+		},
+		{
+			"label": "Jeu : tests",
+			"type": "shell",
+			"command": "python -m unittest discover -s tests",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "Jeu : serveur local",
+			"type": "shell",
+			"command": "python -m http.server 8765 --directory dist",
+			"isBackground": true,
+			"problemMatcher": []
+		}
+	]
 }
